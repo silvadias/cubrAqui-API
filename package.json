@@ -2,5 +2,8 @@
     "name": "node_start_environment",
     "version": "1.0.0",
     "description": "Basic Node Environment.",
-    "main": "server.js"
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    }
 }
