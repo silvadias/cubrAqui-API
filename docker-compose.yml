@@ -2,3 +2,5 @@ version: '3'
 
 services:
   nodeService:
+     image: node:20-alpine
+     container_name: node
