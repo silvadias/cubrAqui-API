@@ -1,5 +1,6 @@
 {
     "name": "node_start_environment",
     "version": "1.0.0",
-    "description": "Basic Node Environment."
+    "description": "Basic Node Environment.",
+    "main": "server.js"
 }
