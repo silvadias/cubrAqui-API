@@ -4,3 +4,4 @@ services:
   nodeService:
      image: node:20-alpine
      container_name: node
+     user: "node"
