@@ -17,3 +17,16 @@ services:
       npm install &&
       npm start
       "
+    depends_on:
+      - db
+  
+  db:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=nodeDB
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - "3606:3606"
