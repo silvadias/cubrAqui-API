@@ -4,11 +4,12 @@
     "description": "Basic Node Environment.",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "nodemon server.js"
     },
     "author": "Luis Carlos da Silva Dias.",
     "license": "MIT",
     "dependencies": {
-        "express": "^4.17.1"
+        "express": "^4.17.1",     
+        "nodemon":"^3.1.0"
     }
 }
