@@ -19,14 +19,24 @@ services:
       "
     depends_on:
       - db
+    networks:
+      - cubraqui
   
   db:
     image: mysql:8
     container_name: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
+    environment:    
       - MYSQL_DATABASE=cubraqui
+      - MYSQL_PASSWORD=root  
+      - MYSQL_ROOT_PASSWORD=root
+      
     volumes:
       - ./data:/var/lib/mysql
     ports:
-      - "3606:3606"
+      - "3306:3306"
+    networks:
+      - cubraqui
+
+networks:
+  cubraqui:
+    driver: bridge
