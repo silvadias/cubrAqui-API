@@ -2,9 +2,9 @@
     "name": "node_start_environment",
     "version": "1.0.0",
     "description": "Basic Node Environment.",
-    "main": "server.js",
+    "main": "./src/server.js",
     "scripts": {
-        "start": "nodemon /src/server.js"
+        "start": "nodemon ./src/server.js"
     },
     "author": "Luis Carlos da Silva Dias.",
     "license": "MIT",
