@@ -11,3 +11,5 @@ export const fetchUsers = async () => {
     throw error;
   }
 };
+
+para testes. 
