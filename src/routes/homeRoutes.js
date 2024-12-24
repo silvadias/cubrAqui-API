@@ -6,4 +6,6 @@ const router = express.Router();
 // Definindo a rota principal
 router.get('/', HomeController.home);
 
+
+
 module.exports = router;
