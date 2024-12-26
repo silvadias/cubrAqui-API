@@ -3,18 +3,18 @@ CREATE DATABASE IF NOT EXISTS cubraqui;
 USE cubraqui;
 
 -- Criação da Tabela 'User'
-CREATE TABLE IF NOT EXISTS User (
+CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cpf VARCHAR(11) NOT NULL UNIQUE,
-    fullName VARCHAR(100) NOT NULL,
+    nomeCompleto VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    registrationDate DATETIME DEFAULT CURRENT_TIMESTAMP
+    senha VARCHAR(255) NOT NULL,
+    dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Inserção de 10 Usuários de Teste
 
-INSERT INTO User (cpf, fullName, email, password) VALUES
+INSERT INTO usuarios (cpf, nomeCompleto, email, senha) VALUES
 ('12345678901', 'João Silva', 'joao@example.com', '$2a$10$K1D1iYsW2TpQ6E0PZyZ6qO7vGFY5GGjQYjr0pYhDFEj28V51Ll3wq'),
 ('98765432109', 'Maria Souza', 'maria@example.com', '$2a$10$5oK1A7K7kT7J.YwI9ZDm4pUSjOd6h75gY9hVAYX1bXLzaxPmz7D2m'),
 ('11122233344', 'Carlos Pereira', 'carlos@example.com', '$2a$10$Oe5HMEiOa6hsiFG9P0r0POfWHe9tzDpwgg8mjm8K6mh/OPvVvR/Sq'),

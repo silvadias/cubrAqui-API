@@ -1,22 +1,28 @@
 const express = require('express');
-const userRoutes = require('./routes/userRoutes');
-const shiftRoutes = require('./routes/shiftRoutes');
-const authRoutes = require('./routes/authRoutes');
-const errorHandler = require('./middlewares/errorHandler');
-const homeRoutes = require('./routes/homeRoutes'); // Nome correto
-const newUserRoutes = require('./routes/newUserRoutes');
-
 const app = express();
 
-// Middleware para tratar JSON
-app.use(express.json());
+//rotas
+const userRoutes = require('./routes/userRoutes');
+const acessoRoutes = require('./routes/acessoRoutes');
+const registrarUsuarioRoutes = require('./routes/registrarUsuarioRoutes');
+const debugRouter = require('./routes/debugRoutes'); 
+
+
+
+//middlewares
+const errorHandler = require('./middlewares/errorHandler'); // Middleware para tratar erro
+app.use(express.json()); // Middleware para tratar JSON
+
+
+
+
+
 
 // Rotas
-app.use('/', homeRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/shifts', shiftRoutes);
-app.use('/api/new-user', newUserRoutes);
+app.use('/',errorHandler,debugRouter); // arquivo e rota para debugar e entender código.
+app.use('/api/auth',errorHandler, acessoRoutes);
+app.use('/api/users',errorHandler, userRoutes);
+app.use('/api/cadastro',errorHandler, registrarUsuarioRoutes);
 
 // Middleware de tratamento de erros
 app.use(errorHandler);

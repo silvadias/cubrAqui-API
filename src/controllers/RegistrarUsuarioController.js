@@ -6,11 +6,6 @@ module.exports = {
     const { cpf, nomeCompleto, email, senha } = req.body;
 
     try {
-      // Validação de dados recebidos
-      if (!cpf || !nomeCompleto || !email || !senha) {
-        return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
-      }
-
       // Verifica se o usuário já existe pelo CPF
       const localizarCPF = await Usuario.findOne({ where: { cpf } });
       if (localizarCPF) {
@@ -23,7 +18,7 @@ module.exports = {
         return res.status(400).json({ message: 'Email já cadastrado' });
       }
 
-      // Criptografa a senha
+      // Criptografa a senha 
       const senhaCriptografada = await Criptografia.gerar(senha);
 
       // Cria o usuário

@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
-const bcrypt = require('bcryptjs');
 const db = require('../config/db');
 
-const User = db.define('User', {
+const Usuario = db.define('Usuario', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -17,7 +16,7 @@ const User = db.define('User', {
       len: [11, 11],
     },
   },
-  fullName: {
+  nomeCompleto: {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
@@ -29,25 +28,18 @@ const User = db.define('User', {
       isEmail: true,
     },
   },
-  password: {
+  senha: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  registrationDate: {
+  dataCadastro: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
 }, {
-  tableName: 'User',
+  tableName: 'usuarios',
   timestamps: false,
   freezeTableName: true,
 });
 
-// Hook para criptografar a senha antes de criar um usuário
-User.beforeCreate(async (user, options) => {
-  if (user.password) {
-    user.password = await bcrypt.hash(user.password, 10);
-  }
-});
-
-module.exports = User;
+module.exports = Usuario;
