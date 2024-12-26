@@ -19,10 +19,10 @@ app.use(express.json()); // Middleware para tratar JSON
 
 
 // Rotas
-app.use('/',errorHandler,debugRouter); // arquivo e rota para debugar e entender código.
+app.use('/',debugRouter); // arquivo e rota para debugar e entender código.
 app.use('/api/auth',errorHandler, acessoRoutes);
-app.use('/api/users',errorHandler, userRoutes);
-app.use('/api/cadastro',errorHandler, registrarUsuarioRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/cadastro', registrarUsuarioRoutes);
 
 // Middleware de tratamento de erros
 app.use(errorHandler);
