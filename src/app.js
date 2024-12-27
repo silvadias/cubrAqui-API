@@ -5,7 +5,8 @@ const app = express();
 const userRoutes = require('./routes/userRoutes');
 const acessoRoutes = require('./routes/acessoRoutes');
 const registrarUsuarioRoutes = require('./routes/registrarUsuarioRoutes');
-const debugRouter = require('./routes/debugRoutes'); 
+const debugRouter = require('./routes/debugRoutes');
+const registrarEmpresaRoutes=require('./routes/registrarEmpresaRoutes') ;
 
 
 
@@ -24,6 +25,7 @@ app.use('/',debugRouter); // arquivo e rota para debugar e entender código.
 app.use('/api/acesso', acessoRoutes);
 app.use('/api/users',userRoutes);
 app.use('/api/cadastro', registrarUsuarioRoutes);
+app.use('/api/cadastro', registrarEmpresaRoutes)
 
 // Middleware de tratamento de erros
 app.use(errorHandler);

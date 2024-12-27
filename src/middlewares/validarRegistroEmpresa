@@ -1,0 +1,45 @@
+const Empresa = require('../models/Empresa');  // Caminho do modelo da Empresa
+
+// Função para validar CNPJ
+function validarCNPJ(cnpj) {
+  // Expressão regular para verificar o formato do CNPJ (apenas números)
+  const cnpjRegex = /^\d{14}$/;
+  return cnpjRegex.test(cnpj);
+}
+
+// Middleware para validar CNPJ
+async function verificarCNPJ(req, res, next) {
+  const { cnpj, matricialidade } = req.body;
+
+  // Verifica se o CNPJ foi fornecido
+  if (!cnpj) {
+    return res.status(400).json({ error: 'CNPJ é obrigatório' });
+  }
+
+  // Valida o formato do CNPJ
+  if (!validarCNPJ(cnpj)) {
+    return res.status(400).json({ error: 'CNPJ inválido. Deve conter 14 dígitos numéricos' });
+  }
+
+  // Se for uma filial (matricialidade === 'filial'), não precisa verificar duplicidade de CNPJ
+  if (matricialidade === 'filial') {
+    return next(); // Permite a continuidade do fluxo, pois a filial pode ter o mesmo CNPJ
+  }
+
+  // Caso contrário, verifica se o CNPJ já existe para matrizes
+  try {
+    const empresaExistente = await Empresa.findOne({ where: { cnpj, matricialidade: 'matriz' } });
+
+    // Se a matriz já existir, retorna erro
+    if (empresaExistente) {
+      return res.status(400).json({ error: 'Este CNPJ já está cadastrado como matriz no sistema' });
+    }
+
+    // Se tudo estiver ok, segue para a próxima etapa
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro interno do servidor. Tente novamente mais tarde.' });
+  }
+}
+
+module.exports = verificarCNPJ;
