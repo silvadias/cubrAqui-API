@@ -12,7 +12,7 @@ const Empresa = sequelize.define(
     cnpj: {
       type: DataTypes.STRING(14),
       allowNull: false,
-      unique: true,
+      unique: false,
     },
     razaoSocial: {
       type: DataTypes.STRING(255),
