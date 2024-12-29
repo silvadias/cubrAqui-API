@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 -- Criação da Tabela 'empresas' sem chave estrangeira inicialmente
 CREATE TABLE IF NOT EXISTS empresas (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    cnpj VARCHAR(14) NOT NULL UNIQUE,
+    cnpj VARCHAR(14) NOT NULL,
     razaoSocial VARCHAR(255) NOT NULL,
     nomeFantasia VARCHAR(100) NOT NULL,
     emailCorporativo VARCHAR(100) NOT NULL UNIQUE,
