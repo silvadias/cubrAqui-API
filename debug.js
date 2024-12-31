@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
-  //res.send('debug');
-  res.json(req.user);
+
+module.exports = async (req, res) => {
+ 
 };

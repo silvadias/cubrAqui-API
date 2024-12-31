@@ -4,12 +4,13 @@ const app       = express();
 //impotação de rotas
 const userRoutes            = require('./routes/userRoutes');
 const acessoRoutes          = require('./routes/acessoRoutes');
-const registrarRoutes       = require('./routes/registrarRoutes');
+const cadastrarRoutes       = require('./routes/cadastrarRoutes');
 const debugRouter           = require('./routes/debugRoutes');
+const consultar             = require('./routes/consultarRoutes');
 
 //importação de middlewares
 const errorHandler          = require('./middlewares/errorHandler');    // Middleware para tratar erro
-const validarrAcesso       = require('./middlewares/validarAcesso'); // Middleware para verificar acesso de usuarios.
+//const validarrAcesso       = require('./middlewares/validarAcesso'); // Middleware para verificar acesso de usuarios.
 
 // Middleware para analisar JSON no corpo das requisições
 app.use(express.json());
@@ -19,7 +20,8 @@ app.use(express.json());
 app.use('/',                debugRouter);           // arquivo e rota para debugar e entender código.
 app.use('/api/acesso',      acessoRoutes);          // Rota de Acesso e autorização.
 app.use('/api/users',       userRoutes);            // Retorna todos os usuários.
-app.use('/api/cadastro',    registrarRoutes);       // Novos registros: usuarios e empresas.
+app.use('/api/cadastrar',    cadastrarRoutes);       // Novos registros: usuarios e empresas.
+app.use('/api/consultar',   consultar);
 
 
 // Middleware de tratamento de erros

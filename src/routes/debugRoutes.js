@@ -4,6 +4,6 @@ const controleAcesso = require('../middlewares/validarAcesso');
 
 const router = express.Router();
 
-router.get('/', controleAcesso,debug);
+router.get('/',debug);
 
 module.exports = router;
