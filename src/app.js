@@ -2,14 +2,14 @@ const express   = require('express');
 const app       = express();
 
 //impotação de rotas
-const userRoutes            = require('./routes/    userRoutes');
-const acessoRoutes          = require('./routes/    acessoRoutes');
-const registrarRoutes       = require('./routes/    registrarRoutes');
-const debugRouter           = require('./routes/    debugRoutes');
+const userRoutes            = require('./routes/userRoutes');
+const acessoRoutes          = require('./routes/acessoRoutes');
+const registrarRoutes       = require('./routes/registrarRoutes');
+const debugRouter           = require('./routes/debugRoutes');
 
 //importação de middlewares
-const errorHandler          = require('./middlewares/   rrorHandler');    // Middleware para tratar erro
-const verificarAcesso       = require('./middlewares/   verificarAcesso'); // Middleware para verificar acesso de usuarios.
+const errorHandler          = require('./middlewares/errorHandler');    // Middleware para tratar erro
+const validarrAcesso       = require('./middlewares/validarAcesso'); // Middleware para verificar acesso de usuarios.
 
 // Middleware para analisar JSON no corpo das requisições
 app.use(express.json());

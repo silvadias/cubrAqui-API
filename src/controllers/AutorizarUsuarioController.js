@@ -36,15 +36,17 @@ module.exports = {
 
       // Gerar token JWT
       const tokenJWT = jwt.sign(
-        { id: usuarioEncontrado.id, cpf: usuarioEncontrado.cpf },
-        JWT_SECRET,
+        { pessoa:'física',
+          id: usuarioEncontrado.id, 
+          cpf: usuarioEncontrado.cpf },
+          JWT_SECRET,
         { expiresIn: JWT_EXPIRES_IN }
       );
 
       // Retornar resposta bem-sucedida com o token
       return res.status(200).json({
         message: 'Login bem-sucedido',
-        token: tokenJWT,
+        token: tokenJWT,        
       });
 
     } catch (erro) {
