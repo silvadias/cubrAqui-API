@@ -1,3 +1,5 @@
+const Usuario = require('../models/Usuario');
+
 /**
  * @file validarCadastroMiddleware.js
  * @description Middleware responsável por validar os dados de cadastro do usuário.
@@ -44,36 +46,54 @@ const validarCPF = (cpf) => {
 /**
  * @function validarCadastro
  * @description Middleware para validar os dados do corpo da requisição durante o cadastro.
+ * @async
  * @param {Object} req - Objeto de solicitação HTTP.
  * @param {Object} res - Objeto de resposta HTTP.
  * @param {Function} next - Função para passar o controle para o próximo middleware.
  * @returns {Object|Function} - Retorna um erro de validação ou chama o próximo middleware.
  */
-const validarCadastro = (req, res, next) => {
-  const { cpf, nomeCompleto, email, senha } = req.body;
+const validarCadastro = async (req, res, next) => {
+  try {
+    const { cpf, nomeCompleto, email, senha } = req.body;
 
-  // Validação dos campos obrigatórios
-  if (!cpf || !nomeCompleto || !email || !senha) {
-    return res.status(400).json({ mensagem: 'Todos os campos são obrigatórios.' });
+    // 🛡️ Validação dos campos obrigatórios
+    if (!cpf || !nomeCompleto || !email || !senha) {
+      return res.status(400).json({ mensagem: 'Todos os campos são obrigatórios.' });
+    }
+
+    // 🛡️ Validação do formato do CPF
+    if (!/^\d{11}$/.test(cpf)) {
+      return res.status(400).json({ mensagem: 'CPF deve conter exatamente 11 números.' });
+    }
+
+    // 🛡️ Validação do comprimento da senha
+    if (senha.length < 6) {
+      return res.status(400).json({ mensagem: 'A senha deve ter pelo menos 6 caracteres.' });
+    }
+
+    // 🛡️ Validação do CPF com a lógica específica
+    if (!validarCPF(cpf)) {
+      return res.status(400).json({ mensagem: 'CPF inválido.' });
+    }
+
+    // 🛡️ Verifica se o CPF já está cadastrado
+    const localizarCPF = await Usuario.findOne({ where: { cpf } });
+    if (localizarCPF) {
+      return res.status(400).json({ mensagem: 'Usuário já existe com este CPF.' });
+    }
+
+    // 🛡️ Verifica se o email já está cadastrado
+    const localizarEmail = await Usuario.findOne({ where: { email } });
+    if (localizarEmail) {
+      return res.status(400).json({ mensagem: 'Email já cadastrado.' });
+    }
+
+    // ✅ Prossegue para o próximo middleware ou controlador
+    next();
+  } catch (error) {
+    console.error('Erro no middleware de validação de cadastro:', error);
+    return res.status(500).json({ mensagem: 'Erro interno no servidor.' });
   }
-
-  // Validação do formato do CPF
-  if (!/^\d{11}$/.test(cpf)) {
-    return res.status(400).json({ mensagem: 'CPF deve conter exatamente 11 números.' });
-  }
-
-  // Validação do comprimento da senha
-  if (senha.length < 6) {
-    return res.status(400).json({ mensagem: 'A senha deve ter pelo menos 6 caracteres.' });
-  }
-
-  // Validação do CPF com a lógica específica
-  if (!validarCPF(cpf)) {
-    return res.status(400).json({ mensagem: 'CPF inválido.' });
-  }
-
-  // Prossegue para o próximo middleware ou controlador
-  next();
 };
 
 module.exports = validarCadastro;

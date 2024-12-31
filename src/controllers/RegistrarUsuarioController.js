@@ -20,17 +20,7 @@ module.exports = {
     const { cpf, nomeCompleto, email, senha } = req.body;
 
     try {
-      // 🛡️ Verifica se o CPF já está cadastrado
-      const localizarCPF = await Usuario.findOne({ where: { cpf } });
-      if (localizarCPF) {
-        return res.status(400).json({ message: 'Usuário já existe com este CPF' });
-      }
-
-      // 🛡️ Verifica se o email já está cadastrado
-      const localizarEmail = await Usuario.findOne({ where: { email } });
-      if (localizarEmail) {
-        return res.status(400).json({ message: 'Email já cadastrado' });
-      }
+      
 
       // 🔒 Criptografa a senha antes de salvar no banco
       const senhaCriptografada = await Criptografia.gerar(senha);

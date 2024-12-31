@@ -1,31 +1,26 @@
-const express = require('express');
-const app = express();
+const express   = require('express');
+const app       = express();
 
-//rotas
-const userRoutes = require('./routes/userRoutes');
-const acessoRoutes = require('./routes/acessoRoutes');
-const registrarUsuarioRoutes = require('./routes/registrarUsuarioRoutes');
-const debugRouter = require('./routes/debugRoutes');
-const registrarEmpresaRoutes=require('./routes/registrarEmpresaRoutes') ;
+//impotação de rotas
+const userRoutes            = require('./routes/    userRoutes');
+const acessoRoutes          = require('./routes/    acessoRoutes');
+const registrarRoutes       = require('./routes/    registrarRoutes');
+const debugRouter           = require('./routes/    debugRoutes');
 
+//importação de middlewares
+const errorHandler          = require('./middlewares/   rrorHandler');    // Middleware para tratar erro
+const verificarAcesso       = require('./middlewares/   verificarAcesso'); // Middleware para verificar acesso de usuarios.
 
-
-//middlewares
-const errorHandler = require('./middlewares/errorHandler'); // Middleware para tratar erro
-const verificarAcesso = require('./middlewares/verificarAcesso'); // Middleware para verificar acesso de usuarios.
-app.use(express.json()); // Middleware para tratar JSON
-
-
-
-
+// Middleware para analisar JSON no corpo das requisições
+app.use(express.json());
 
 
 // Rotas
-app.use('/',debugRouter); // arquivo e rota para debugar e entender código.
-app.use('/api/acesso', acessoRoutes);
-app.use('/api/users',userRoutes);
-app.use('/api/cadastro', registrarUsuarioRoutes);
-app.use('/api/cadastro', registrarEmpresaRoutes)
+app.use('/',                debugRouter);           // arquivo e rota para debugar e entender código.
+app.use('/api/acesso',      acessoRoutes);          // Rota de Acesso e autorização.
+app.use('/api/users',       userRoutes);            // Retorna todos os usuários.
+app.use('/api/cadastro',    registrarRoutes);       // Novos registros: usuarios e empresas.
+
 
 // Middleware de tratamento de erros
 app.use(errorHandler);
