@@ -19,7 +19,7 @@ app.use(express.json());
 // Rotas
 app.use('/',                debugRouter);           // arquivo e rota para debugar e entender código.
 app.use('/api/acesso',      acessoRoutes);          // Rota de Acesso e autorização.
-app.use('/api/users',       userRoutes);            // Retorna todos os usuários.
+app.use('/api/usuario',       userRoutes);            // Retorna todos os usuários.
 app.use('/api/cadastrar',    cadastrarRoutes);       // Novos registros: usuarios e empresas.
 app.use('/api/consultar',   consultar);
 
