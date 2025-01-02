@@ -1,4 +1,3 @@
-//const debug = require('../../debug');
 /**
  * Middleware para verificação do token JWT.
  * 

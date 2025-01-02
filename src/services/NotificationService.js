@@ -3,4 +3,3 @@ module.exports = {
       console.log(`Enviando notificação para ${user}: ${message}`);
     }
   };
-  
