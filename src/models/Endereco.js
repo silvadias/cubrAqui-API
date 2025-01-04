@@ -10,10 +10,12 @@ const Endereco = sequelize.define('Endereco', {
   idEmpresa: {
     type: DataTypes.INTEGER, // ID da empresa (pode ser nulo, caso seja um endereço de usuário)
     allowNull: true,
+    unique:true,
   },
   idUsuario: {
     type: DataTypes.INTEGER, // ID do usuário (pode ser nulo, caso seja um endereço de empresa)
     allowNull: true,
+    unique:true,
   },
   cep: {
     type: DataTypes.STRING(10),
@@ -44,6 +46,13 @@ const Endereco = sequelize.define('Endereco', {
     allowNull: true,
   },
 }, {
+  indexes: [
+    {
+      unique: true,
+      fields: ['idUsuario', 'idEmpresa']
+    }
+  ]
+},{
   tableName: 'enderecos', // Nome real da tabela no banco de dados
   timestamps: false, // Desabilita colunas de timestamps (createdAt, updatedAt)
 });

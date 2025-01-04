@@ -1,4 +1,4 @@
-const { Endereco } = require('../models');
+const Endereco = require('../models/Endereco');
 
 // Função para cadastrar um novo endereço
 async function registrar(req, res) {
@@ -18,6 +18,19 @@ async function registrar(req, res) {
     if (!cep || !numero) {
       return res.status(400).json({ message: "CEP e número são obrigatórios." });
     }
+
+    const idCadastrado = await Endereco.findAll({
+      where: {
+        [cliente]: id // A chave será dinamicamente substituída por idUsuario ou idEmpresa
+      }
+    });
+
+    if (idCadastrado.length > 0) {
+      return res.status(409).json({ message: "Só é possível registarr um endereço por cadastro!"});
+    }
+
+
+
     const data = {
       [cliente]:id,
       cep: req.body.cep,
@@ -34,7 +47,7 @@ async function registrar(req, res) {
     // Respondendo com o endereço criadol
     return res.status(201).json({
       message: "Endereço cadastrado com sucesso!",
-      endereco: novoEndereco,
+
     });
   } catch (error) {
     console.error(error);

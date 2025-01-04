@@ -30,7 +30,7 @@ module.exports = (req, res, next) => {
     const decoded = jwt.verify(token, JWT_SECRET);
 
     // Adiciona as informações decodificadas ao objeto req.usuario
-    req.usuario = decoded;
+    req.tokenDecodificado = decoded;
 
     // Chama o próximo middleware ou a rota
     next();

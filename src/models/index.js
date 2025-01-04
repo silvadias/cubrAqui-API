@@ -1,10 +1,9 @@
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(/* conexão com o banco */);
+const sequelize = require('../config/db'); // Importa a instância do sequelize configurada
 
 const models = {
-  Empresa: require('./Empresa')(sequelize, Sequelize.DataTypes),
-  Usuario: require('./Usuario')(sequelize, Sequelize.DataTypes),
-  Endereco: require('./Endereco')(sequelize, Sequelize.DataTypes),
+  Empresa: require('./Empresa')(sequelize),  // Passa o sequelize configurado
+  Usuario: require('./Usuario')(sequelize),
+  Endereco: require('./Endereco')(sequelize),
 };
 
 // Associar os modelos
