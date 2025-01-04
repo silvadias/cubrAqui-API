@@ -1,37 +1,37 @@
-const { Endereco, Empresa, Usuario } = require('../models');
+const { Endereco } = require('../models');
 
 // Função para cadastrar um novo endereço
-const CadastrarEnderecoController = async (req, res) => {
+async function registrar(req, res) {
   try {
-    // Extraindo os dados da requisição
-    const { pessoa,cep, numero, complemento, bloco, apartamento, tipoLocal, referencia } = req.body;
-    let pessoa_id;
-  
-    if (pessoa === 'física') {
-      id = `F:${id}`;  // Prefixo para usuário
-    } else if (pessoa === 'jurídica') {
-      id = `J:${id}`;  // Prefixo para empresa
-    }
+    // Extraindo informações do token decodificado
+    const id = req.tokenDecodificado.id;
+    const pessoa = req.tokenDecodificado.pessoa;
+    let cliente;
 
-    // Validação simples (adicione validações conforme necessário)
+    // Definindo o cliente com base no tipo de pessoa
+    cliente = pessoa === 'física' ? 'idUsuario' : 'idEmpresa';
+
+    // Extraindo os dados da requisição
+    const { cep, numero, complemento, bloco, apartamento, tipoLocal, referencia } = req.body;
+
+    // Validação simples
     if (!cep || !numero) {
       return res.status(400).json({ message: "CEP e número são obrigatórios." });
     }
+    const data = {
+      [cliente]:id,
+      cep: req.body.cep,
+      numero: req.body.numero,
+      complemento: req.body.complemento,
+      bloco: req.body.bloco,
+      apartamento: req.body.apartamento,
+      tipo_local: req.body.tipoLocal,
+      referencia: req.body.referencia,
+    };
 
-    // Criando o novo endereço
-    const novoEndereco = await Endereco.create({
-      id,
-      
-      cep,
-      numero,
-      complemento,
-      bloco,
-      apartamento,
-      tipoLocal,
-      referencia,
-    });
+    const novoEndereco = await Endereco.create(data);
 
-    // Respondendo com o endereço criado
+    // Respondendo com o endereço criadol
     return res.status(201).json({
       message: "Endereço cadastrado com sucesso!",
       endereco: novoEndereco,
@@ -40,39 +40,6 @@ const CadastrarEnderecoController = async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: "Erro ao cadastrar o endereço." });
   }
-};
-
-module.exports = {
-  CadastrarEnderecoController,
-};
-
-
-=====
-
-
-
-// Controller para salvar o endereço
-async function salvarEndereco(req, res) {
-  const { id, tipoPessoa, cep, numero, complemento } = req.body;
-
-  let pessoa_id;
-  
-  if (tipoPessoa === 'física') {
-    pessoa_id = `F:${id}`;  // Prefixo para usuário
-  } else if (tipoPessoa === 'jurídica') {
-    pessoa_id = `J:${id}`;  // Prefixo para empresa
-  }
-
-  try {
-    const endereco = await Endereco.create({
-      pessoa_id, 
-      cep, 
-      numero, 
-      complemento,
-    });
-
-    return res.status(200).json({ message: 'Endereço salvo com sucesso', endereco });
-  } catch (error) {
-    return res.status(500).json({ message: 'Erro ao salvar endereço' });
-  }
 }
+
+module.exports = { registrar };
