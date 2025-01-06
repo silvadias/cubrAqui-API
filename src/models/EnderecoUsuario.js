@@ -20,10 +20,10 @@ const EnderecoUsuario = sequelize.define('Endereco_Usuario', {
   timestamps: true,
 });
 
-// Definindo a associação: EnderecoEmpresa pertence a uma Empresa
+// Definindo a associação: EnderecoUsuario pertence a uma Usuario
 EnderecoEmpresa.belongsTo(Usuario, {
-  foreignKey: 'idUsuario',  // A chave estrangeira é o campo 'idEmpresa'
-  targetKey: 'id',  // A chave primária da Empresa
+  foreignKey: 'idUsuario',  // A chave estrangeira é o campo 'idUsuario'
+  targetKey: 'id',  // A chave primária do Usuario
 });
 
 module.exports = EnderecoUsuario;
