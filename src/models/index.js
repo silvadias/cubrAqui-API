@@ -1,4 +1,4 @@
-const sequelize = require('../config/db'); // Importa a instância do sequelize configurada
+/* const sequelize = require('../config/db'); // Importa a instância do sequelize configurada
 
 const models = {
   Empresa: require('./Empresa')(sequelize),  // Passa o sequelize configurado
@@ -12,3 +12,4 @@ models.Usuario.associate(models);  // Chama o método de associação do Usuario
 models.Endereco.associate(models);  // Chama o método de associação do Endereco
 
 module.exports = models;
+ */
