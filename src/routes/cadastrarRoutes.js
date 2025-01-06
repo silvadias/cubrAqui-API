@@ -4,7 +4,8 @@ const router    = express.Router();
 // controllers
 const CadastrarUsuarioController        = require('../controllers/CadastrarUsuarioController');
 const CadastrarEmpresaController        = require('../controllers/CadastrarEmpresaController');
-const CadastrarEnderecoController        = require('../controllers/CadastrarEnderecoController');
+const CadastrarEnderecoController       = require('../controllers/CadastrarEnderecoController');
+const CadastrarVagaCoberturaController  = require('../controllers/CadastrarVagaCoberturaController') 
 
 
 // middlewares
@@ -16,6 +17,7 @@ const validarAcesso                     = require('../middlewares/validarAcesso'
 router.post('/usuario', ValidarRegistroUsuario,CadastrarUsuarioController.registrar);
 router.post('/empresa', ValidarRegistroEmpresa,CadastrarEmpresaController.registrar);
 router.post('/endereco', validarAcesso, CadastrarEnderecoController.registrar);
+router.post('/cobertura', validarAcesso, CadastrarVagaCoberturaController.registrar);
 
 
 
