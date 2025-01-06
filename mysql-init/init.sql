@@ -1,4 +1,4 @@
--- Criação do Banco de Dados
+/* -- Criação do Banco de Dados
 CREATE DATABASE IF NOT EXISTS cubraqui;
 USE cubraqui;
 
@@ -28,3 +28,4 @@ CREATE TABLE IF NOT EXISTS empresas (
 -- Adiciona a chave estrangeira para 'subordinacao'
 ALTER TABLE empresas
 ADD CONSTRAINT fk_subordinacao FOREIGN KEY (subordinacao) REFERENCES empresas(id) ON DELETE SET NULL;
+ */
