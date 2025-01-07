@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Endereco = sequelize.define('Endereco', {
+const Endereco = sequelize.define('endereco', {
   id: { // Campo de ID auto-incrementado
     type: DataTypes.INTEGER,
     primaryKey: true,

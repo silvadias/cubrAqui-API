@@ -16,6 +16,10 @@ const VagaCobertura = sequelize.define('Vaga_Cobertura', {
             key: 'id',
         }
     },
+    vagas: {
+        type: DataTypes.INTEGER,
+        allowNull:false,        
+    },
     valor: {
         type: DataTypes.DECIMAL(5, 2), // Máximo 5 dígitos, 2 casas decimais
         allowNull: false,
