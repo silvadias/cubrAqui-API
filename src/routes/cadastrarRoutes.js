@@ -12,12 +12,14 @@ const CadastrarVagaCoberturaController  = require('../controllers/CadastrarVagaC
 const ValidarRegistroUsuario            = require('../middlewares/validarRegistroUsuario');
 const ValidarRegistroEmpresa            = require('../middlewares/validarRegistroEmpresa');
 const validarAcesso                     = require('../middlewares/validarAcesso');
+const {validarCEP}                      = require('../middlewares/validarCEP');
+const { validarGeolocalizacao }         = require('../middlewares/validarGeolocalizacao');
 
 // rotas
 router.post('/usuario', ValidarRegistroUsuario,CadastrarUsuarioController.registrar);
 router.post('/empresa', ValidarRegistroEmpresa,CadastrarEmpresaController.registrar);
 router.post('/endereco', validarAcesso, CadastrarEnderecoController.registrar);
-router.post('/cobertura', validarAcesso, CadastrarVagaCoberturaController.registrar);
+router.post('/cobertura', validarAcesso, validarCEP,validarGeolocalizacao,CadastrarVagaCoberturaController.registrar);
 
 
 
