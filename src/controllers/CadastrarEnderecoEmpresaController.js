@@ -26,12 +26,12 @@ async function registrar(req, res){
             referencia,
             latitude,
             longitude,            
-        } = req.body;
+        } = req.body
 
         if (!cep || !numero) {
             return res.status(400).json({ message: "CEP e número são obrigatórios." });
           }
-          const idCadastrado = await Endereco.findAll({
+          const idCadastrado = await EnderecoEmpresa.findAll({
             where: {idEmpresa : id}
           });
       

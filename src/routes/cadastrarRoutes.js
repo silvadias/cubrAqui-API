@@ -29,8 +29,8 @@ const { validarGeolocalizacao }         = require('../middlewares/validarGeoloca
 router.post('/usuario', ValidarRegistroUsuario,CadastrarUsuarioController.registrar);
 router.post('/empresa', ValidarRegistroEmpresa,CadastrarEmpresaController.registrar);
 router.post('/cobertura', validarAcesso, validarCEP,validarGeolocalizacao,CadastrarVagaCoberturaController.registrar);
-router.post('/edereco/usuario', validarAcesso,validarCEP,validarGeolocalizacao,CadastrarEnderecoUsuarioController.registrar);
-router.post('/endereco/empresa', validarAcesso,validarCEP,validarGeolocalizacao,CadastrarEnderecoEmpresaController.registrar);
+router.post('/endereco/usuario', validarAcesso, validarCEP, validarGeolocalizacao,CadastrarEnderecoUsuarioController.registrar);
+router.post('/endereco/empresa', validarAcesso, validarCEP, validarGeolocalizacao,CadastrarEnderecoEmpresaController.registrar);
 
 
 

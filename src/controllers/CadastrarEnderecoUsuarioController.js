@@ -31,7 +31,7 @@ async function registrar(req, res){
         if (!cep || !numero) {
             return res.status(400).json({ message: "CEP e número são obrigatórios." });
           }
-          const idCadastrado = await Endereco.findAll({
+          const idCadastrado = await EnderecoUsuario.findAll({
             where: {idUsuario : id}
           });
       
