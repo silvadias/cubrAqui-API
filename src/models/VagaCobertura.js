@@ -28,7 +28,7 @@ const VagaCobertura = sequelize.define('Vaga_Cobertura', {
             max: 200,
         }
     },
-    servico: {
+    servico: { // profissional
         type: DataTypes.STRING(50),
         allowNull: false,
     },
