@@ -1,4 +1,4 @@
-const EnderecoEmpresa = require('../models/EnderecoEmpresa');
+const EnderecoUsuario = require('../../models/EnderecoUsuario');
 
 async function registrar(req, res){
 
@@ -31,17 +31,16 @@ async function registrar(req, res){
         if (!cep || !numero) {
             return res.status(400).json({ message: "CEP e número são obrigatórios." });
           }
-          const idCadastrado = await EnderecoEmpresa.findAll({
-            where: {idEmpresa : id}
+          const idCadastrado = await EnderecoUsuario.findAll({
+            where: {idUsuario : id}
           });
       
           if (idCadastrado.length > 0) {
-            return res.status(409).json({ message: 
-                "Só é possível registar um endereço por matriz ou filial. Apénas é possível registrar setores."});
+            return res.status(409).json({ message: "Só é possível registar um endereço por usuário!"});
           }
 
-        const EnderecoEmpresaRegistrado = await EnderecoEmpresa.create({
-            idEmpresa: id,            
+        const EnderecoUsuarioRegistrado = await EnderecoUsuario.create({
+            idUsuario: id,            
             cep,
             logradouro,
             complemento,
@@ -65,14 +64,14 @@ async function registrar(req, res){
           });
       
           return res.status(201).json({
-            message: 'Registro de endereço da empresa criado com sucesso!',
-            EnderecoEmpresa: EnderecoEmpresaRegistrado});
+            message: 'Registro de endereço do usuário criado com sucesso!',
+            EnderecoEmpresa: EnderecoUsuarioRegistrado});
 
         
     } catch (error) {
 
          // ⚠️ Captura e registra erros no processo
-      console.error('❌ Erro ao registrar endereço da empresa:', error);
+      console.error('❌ Erro ao registrar endereço do usuário:', error);
       return res.status(500).json({
         message: 'Erro ao registrar',
         falha: error.message,});        

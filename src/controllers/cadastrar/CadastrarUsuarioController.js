@@ -2,8 +2,8 @@
  * Controller responsável por gerenciar o registro de novos usuários.
  */
 
-const Criptografia = require('../middlewares/criptografia');
-const Usuario = require('../models/Usuario');
+const Criptografia = require('../../middlewares/criptografia');
+const Usuario = require('../../models/Usuario');
 
 module.exports = {
   /**

@@ -1,5 +1,5 @@
-const Criptografia = require('../middlewares/criptografia');
-const Empresa = require('../models/Empresa');
+const Criptografia = require('../../middlewares/criptografia');
+const Empresa = require('../../models/Empresa');
 
 // 🚀 Controller para criar uma empresa
 async function registrar(req, res) {
