@@ -3,19 +3,21 @@ const router    = express.Router();
 
 // controllers
 const CadastrarUsuarioController
-= require('../controllers/CadastrarUsuarioController');
+= require('../controllers/cadastrar/CadastrarUsuarioController');
 
 const CadastrarEmpresaController
-= require('../controllers/CadastrarEmpresaController');
+= require('../controllers/cadastrar/CadastrarEmpresaController');
 
 const CadastrarVagaCoberturaController
-= require('../controllers/CadastrarVagaCoberturaController');
+= require('../controllers/cadastrar/CadastrarVagaCoberturaController');
 
 const CadastrarEnderecoUsuarioController
-= require('../controllers/CadastrarEnderecoUsuarioController') ;
+= require('../controllers/cadastrar/CadastrarEnderecoUsuarioController') ;
 
 const CadastrarEnderecoEmpresaController
-= require('../controllers/CadastrarEnderecoEmpresaController');
+= require('../controllers/cadastrar/CadastrarEnderecoEmpresaController');
+const CadastrarClassificacaoProfissionalController
+= require('../controllers/cadastrar/CadastrarClassificacaoProfissionalController');
 
 
 // middlewares
@@ -31,6 +33,7 @@ router.post('/empresa', ValidarRegistroEmpresa,CadastrarEmpresaController.regist
 router.post('/cobertura', validarAcesso, validarCEP,validarGeolocalizacao,CadastrarVagaCoberturaController.registrar);
 router.post('/endereco/usuario', validarAcesso, validarCEP, validarGeolocalizacao,CadastrarEnderecoUsuarioController.registrar);
 router.post('/endereco/empresa', validarAcesso, validarCEP, validarGeolocalizacao,CadastrarEnderecoEmpresaController.registrar);
+router.post('/profissao', CadastrarClassificacaoProfissionalController.registrar);
 
 
 
