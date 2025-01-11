@@ -1,8 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/db');
-const ClassificacaoProfissional = require('./ClassificacaoProfissional'); // Ajuste o caminho conforme necessário
+const ClassificacaoProfissional = require('./ClassificacaoProfissional');
+const Usuario = require('../Usuario');
 
-
+// Definindo a tabela de relação entre usuários e classificações de habilidades
 const HabilidadeProfissionalUsuario = sequelize.define(
   'HabilidadeProfissionalUsuario',
   {
@@ -15,21 +16,21 @@ const HabilidadeProfissionalUsuario = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'usuarios', // Nome da tabela de usuários
+        model: 'usuarios', // Referencia a tabela de usuários
         key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE', // Exclusão em cascata
+      onDelete: 'CASCADE',
     },
     idHabilidade: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'classificacoes_profissionais', // Nome da tabela de habilidades
+        model: 'classificacoes_profissionais', // Referencia a tabela de classificações
         key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE', // Exclusão em cascata
+      onDelete: 'CASCADE',
     },
   },
   {
@@ -38,8 +39,6 @@ const HabilidadeProfissionalUsuario = sequelize.define(
     freezeTableName: true, // Evita pluralização automática
   }
 );
-HabilidadeProfissionalUsuario.belongsTo(Usuario, { foreignKey: 'idUsuario', as: 'usuario' });
-HabilidadeProfissionalUsuario.belongsTo(ClassificacaoProfissional, { foreignKey: 'idHabilidade', as: 'habilidade' });
 
-
+// Exporta o modelo
 module.exports = HabilidadeProfissionalUsuario;

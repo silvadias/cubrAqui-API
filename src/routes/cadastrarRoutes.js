@@ -18,7 +18,8 @@ const CadastrarEnderecoEmpresaController
 = require('../controllers/cadastrar/CadastrarEnderecoEmpresaController');
 const CadastrarClassificacaoProfissionalController
 = require('../controllers/cadastrar/CadastrarClassificacaoProfissionalController');
-
+const HabilidadeProfissionalUsuario
+= require('../controllers/cadastrar/CadastrarHabilidadeUsuarioController');
 
 // middlewares
 const ValidarRegistroUsuario            = require('../middlewares/validarRegistroUsuario');
@@ -34,6 +35,8 @@ router.post('/cobertura', validarAcesso, validarCEP,validarGeolocalizacao,Cadast
 router.post('/endereco/usuario', validarAcesso, validarCEP, validarGeolocalizacao,CadastrarEnderecoUsuarioController.registrar);
 router.post('/endereco/empresa', validarAcesso, validarCEP, validarGeolocalizacao,CadastrarEnderecoEmpresaController.registrar);
 router.post('/profissao', CadastrarClassificacaoProfissionalController.registrar);
+router.post('/profissao/usuario', HabilidadeProfissionalUsuario.registrar);
+router.post('/profissao/usuario/lista', HabilidadeProfissionalUsuario.getHabilidadeUsuario);
 
 
 

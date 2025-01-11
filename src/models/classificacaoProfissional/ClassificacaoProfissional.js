@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/db');
+const HabilidadeProfissionalUsuario = require('./HabilidadeProfissionalUsuario');
 
 const ClassificacaoProfissional = sequelize.define('ClassificacaoProfissional', {
   id: {
@@ -38,14 +39,5 @@ const ClassificacaoProfissional = sequelize.define('ClassificacaoProfissional', 
   ],
 });
 
-// Relação auto-referenciada
-ClassificacaoProfissional.hasMany(ClassificacaoProfissional, {
-  foreignKey: 'idPai',
-  as: 'filhos',
-});
-ClassificacaoProfissional.belongsTo(ClassificacaoProfissional, {
-  foreignKey: 'idPai',
-  as: 'pai',
-});
 
 module.exports = ClassificacaoProfissional;

@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../config/db');
+const HabilidadeProfissionalUsuario = require('./classificacaoProfissional/HabilidadeProfissionalUsuario') 
+
 
 const Usuario = db.define('Usuario', {
   id: {
@@ -32,13 +34,9 @@ const Usuario = db.define('Usuario', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  dataCadastro: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
 }, {
   tableName: 'usuarios',
-  timestamps: false,
+  timestamps: true,
   freezeTableName: true,
 });
 

@@ -1,40 +1,26 @@
-const HabilidadeProfissionalUsuario = require('../../models/HabilidadeProfissionalUsuario');
-const Usuario = require('../../models/Usuario');
-const ClassificacaoProfissional = require('../../models/classificacaoProfissional/ClassificacaoProfissional');
+const { Usuario, ClassificacaoProfissional, HabilidadeProfissionalUsuario } = require('../../models/associations/HabilidadeUsuarioProfissaoAssociation');
 
-
+// Registro de habilidade para o usuário
 async function registrar(req, res) {
   try {
     const { idUsuario, idHabilidade } = req.body;
+    
+   
 
-    // Verificar se os campos foram fornecidos
-    if (!idUsuario || !idHabilidade) {
-      return res.status(400).json({ erro: 'Os campos "idUsuario" e "idHabilidade" são obrigatórios.' });
-    }
-
-    // Verificar se o usuário existe
-    const usuario = await Usuario.findByPk(idUsuario);
-    if (!usuario) {
-      return res.status(404).json({ erro: 'Usuário não encontrado.' });
-    }
-
-    // Verificar se a habilidade existe
-    const habilidade = await ClassificacaoProfissional.findByPk(idHabilidade);
-    if (!habilidade) {
-      return res.status(404).json({ erro: 'Habilidade não encontrada.' });
+    // Validar entrada
+    if (!Number.isInteger(idUsuario) || !Number.isInteger(idHabilidade)) {
+      return res.status(400).json({ erro: 'Os campos "idUsuario" e "idHabilidade" devem ser números inteiros.' });
     }
 
     // Verificar se a relação já existe
-    const relacaoExistente = await HabilidadeProfissionalUsuario.findOne({
+    const [novaRelacao, criado] = await HabilidadeProfissionalUsuario.findOrCreate({
       where: { idUsuario, idHabilidade },
     });
 
-    if (relacaoExistente) {
+    if (!criado) {
       return res.status(400).json({ erro: 'A relação entre o usuário e a habilidade já existe.' });
     }
 
-    // Criar a relação
-    const novaRelacao = await HabilidadeProfissionalUsuario.create({ idUsuario, idHabilidade });
     return res.status(201).json({ mensagem: 'Habilidade registrada com sucesso.', dados: novaRelacao });
   } catch (erro) {
     console.error('Erro ao registrar habilidade:', erro);
@@ -42,21 +28,31 @@ async function registrar(req, res) {
   }
 }
 
+// Obter habilidades de um usuário
 async function getHabilidadeUsuario(req, res) {
   try {
-    const { idUsuario } = req.params;
+    const { idUsuario } = req.body;
+    //console.log(idUsuario);
 
-    // Verificar se o usuário existe
+    //return res.status(200).json({message: idUsuario});
+    // Validar entrada
+    if (!Number.isInteger(Number(idUsuario))) {
+      return res.status(400).json({ erro: 'O campo "idUsuario" deve ser um número inteiro.' });
+    }
+
+    // Verificar se o usuário existe e incluir habilidades relacionadas
     const usuario = await Usuario.findByPk(idUsuario, {
       include: [
         {
           model: HabilidadeProfissionalUsuario,
           as: 'habilidades',
-          include: {
-            model: ClassificacaoProfissional,
-            as: 'habilidade',
-            attributes: ['id', 'nome'], // Ajuste conforme o modelo
-          },
+          include: [
+            {
+              model: ClassificacaoProfissional,
+              as: 'habilidade',
+              attributes: ['id', 'nome'],
+            },
+          ],
         },
       ],
     });
@@ -65,7 +61,13 @@ async function getHabilidadeUsuario(req, res) {
       return res.status(404).json({ erro: 'Usuário não encontrado.' });
     }
 
-    return res.status(200).json({ dados: usuario.habilidades });
+    // Mapear habilidades em um formato mais limpo
+    const habilidades = usuario.habilidades.map((habilidadeRel) => ({
+      id: habilidadeRel.habilidade.id,
+      nome: habilidadeRel.habilidade.nome,
+    }));
+
+    return res.json({ usuario: usuario.nome, habilidades });
   } catch (erro) {
     console.error('Erro ao obter habilidades do usuário:', erro);
     return res.status(500).json({ erro: 'Erro interno do servidor.' });
