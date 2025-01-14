@@ -1,77 +1,52 @@
-const { Usuario, ClassificacaoProfissional, HabilidadeProfissionalUsuario } = require('../../models/associations/HabilidadeUsuarioProfissaoAssociation');
-
+const { HabilidadeProfissionalUsuario, Usuario, ClassificacaoProfissional} = require('../../models/associations/HabilidadeUsuarioProfissaoAssociation');
+ 
 // Registro de habilidade para o usuário
 async function registrar(req, res) {
   try {
     const { idUsuario, idHabilidade } = req.body;
+
+
+     gravado = await HabilidadeProfissionalUsuario.create({
+      idUsuario:idUsuario,
+      idHabilidade:idHabilidade,
+    })
     
-   
-
-    // Validar entrada
-    if (!Number.isInteger(idUsuario) || !Number.isInteger(idHabilidade)) {
-      return res.status(400).json({ erro: 'Os campos "idUsuario" e "idHabilidade" devem ser números inteiros.' });
-    }
-
-    // Verificar se a relação já existe
-    const [novaRelacao, criado] = await HabilidadeProfissionalUsuario.findOrCreate({
-      where: { idUsuario, idHabilidade },
-    });
-
-    if (!criado) {
-      return res.status(400).json({ erro: 'A relação entre o usuário e a habilidade já existe.' });
-    }
-
-    return res.status(201).json({ mensagem: 'Habilidade registrada com sucesso.', dados: novaRelacao });
-  } catch (erro) {
-    console.error('Erro ao registrar habilidade:', erro);
-    return res.status(500).json({ erro: 'Erro interno do servidor.' });
-  }
-}
-
+    
+  }catch(error){
+    console.log(error);
+  };
+};
 // Obter habilidades de um usuário
-async function getHabilidadeUsuario(req, res) {
+async function getHabilidadeUsuario(req, res) { 
+
   try {
     const { idUsuario } = req.body;
-    //console.log(idUsuario);
+    
+    habilidadeUsuario = await Usuario.findByPk(idUsuario,
+      {
+        include:{model: ClassificacaoProfissional}
+      }
+      
+    )
+    
+    res.status(200).json({habilidadeUsuario});
+    console.log(teste);
+    
 
-    //return res.status(200).json({message: idUsuario});
-    // Validar entrada
-    if (!Number.isInteger(Number(idUsuario))) {
-      return res.status(400).json({ erro: 'O campo "idUsuario" deve ser um número inteiro.' });
-    }
-
-    // Verificar se o usuário existe e incluir habilidades relacionadas
-    const usuario = await Usuario.findByPk(idUsuario, {
-      include: [
-        {
-          model: HabilidadeProfissionalUsuario,
-          as: 'habilidades',
-          include: [
-            {
-              model: ClassificacaoProfissional,
-              as: 'habilidade',
-              attributes: ['id', 'nome'],
-            },
-          ],
-        },
-      ],
+/* 
+    resultado = await Usuario.findByPk(idUsuario,
+      {
+      include: {model: ClassificacaoProfissional},
     });
 
-    if (!usuario) {
-      return res.status(404).json({ erro: 'Usuário não encontrado.' });
-    }
-
-    // Mapear habilidades em um formato mais limpo
-    const habilidades = usuario.habilidades.map((habilidadeRel) => ({
-      id: habilidadeRel.habilidade.id,
-      nome: habilidadeRel.habilidade.nome,
-    }));
-
-    return res.json({ usuario: usuario.nome, habilidades });
-  } catch (erro) {
-    console.error('Erro ao obter habilidades do usuário:', erro);
-    return res.status(500).json({ erro: 'Erro interno do servidor.' });
+    return res.status(200).json({message:resultado}); */
+    
+    
+  }catch(error){
+    console.log(error);
+  
   }
-}
+};
+
 
 module.exports = { registrar, getHabilidadeUsuario };

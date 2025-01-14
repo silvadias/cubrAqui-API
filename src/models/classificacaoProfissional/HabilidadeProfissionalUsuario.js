@@ -16,7 +16,7 @@ const HabilidadeProfissionalUsuario = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'usuarios', // Referencia a tabela de usuários
+        model: Usuario, // Referencia a tabela de usuários
         key: 'id',
       },
       onUpdate: 'CASCADE',
@@ -26,7 +26,7 @@ const HabilidadeProfissionalUsuario = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'classificacoes_profissionais', // Referencia a tabela de classificações
+        model: ClassificacaoProfissional, // Referencia a tabela de classificações
         key: 'id',
       },
       onUpdate: 'CASCADE',
