@@ -1,0 +1,20 @@
+4. Fluxo Geral
+Empresa cria uma vaga.
+
+Controlador: JobController.
+Salva os detalhes na tabela job_posts.
+Usuário vê vagas abertas e aplica a uma.
+
+Controlador: ApplicationController.
+Valida o usuário e cria uma entrada em job_applications.
+Validação automática.
+
+Controlador: ApplicationController.
+Verifica critérios:
+Disponibilidade do usuário.
+Habilidades compatíveis.
+Atualiza status da candidatura e da vaga.
+Notificações.
+
+Notifica empresa sobre o candidato aceito.
+Notifica usuário sobre a aceitação ou rejeição.
