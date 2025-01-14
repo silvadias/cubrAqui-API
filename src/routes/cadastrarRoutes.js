@@ -36,7 +36,7 @@ router.post('/endereco/usuario', validarAcesso, validarCEP, validarGeolocalizaca
 router.post('/endereco/empresa', validarAcesso, validarCEP, validarGeolocalizacao,CadastrarEnderecoEmpresaController.registrar);
 router.post('/profissao', CadastrarClassificacaoProfissionalController.registrar);
 router.post('/profissao/usuario', HabilidadeProfissionalUsuario.registrar);
-router.post('/profissao/usuario/lista', HabilidadeProfissionalUsuario.getHabilidadeUsuario);
+
 
 
 
