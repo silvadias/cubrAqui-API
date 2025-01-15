@@ -17,7 +17,7 @@ async function pegarHabilidadeUsuario(req, res) {
       
     }catch(error){
 
-      console.log(error);    
+      console.log('Nao foi possível obter as habilidades usuario :'.error);    
 
     }
   };  

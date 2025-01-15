@@ -68,6 +68,10 @@ const EnderecoMixin = {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
+    secao: { // Setor ou área específica
+        type: DataTypes.STRING(255),
+        allowNull: true,
+    },
     tipo_local: { // Tipo do local (residencial, comercial, etc.)
         type: DataTypes.STRING(50),
         allowNull: true,

@@ -6,9 +6,11 @@ async function registrar(req, res){
         const id = req.tokenDecodificado.id;
         
         const {          
-            vagas,  
+            vagas,
             valor,
-            servico,
+            especialista,
+            expandirEspecificidade,
+            comprovacaoTecnica,
             dataInicio,
             horaInicio,
             dataFim,
@@ -29,22 +31,25 @@ async function registrar(req, res){
             bloco,
             apartamento,
             setor,
+            secao,
             tipo_local,
             referencia,
             latitude,
             longitude,
-            observacao
+            observacao,
         } = req.body
 
         const VagaCoberturaAberta = await VagaCobertura.create({
             idEmpresa: id,
             vagas,
             valor,
-            servico,
+            especialista,
+            expandirEspecificidade,
+            comprovacaoTecnica,
             dataInicio,
             horaInicio,
             dataFim,
-            horaFim,
+            horaFim,            
             cep,
             logradouro,
             complemento,
@@ -61,6 +66,7 @@ async function registrar(req, res){
             bloco,
             apartamento,
             setor,
+            secao,
             tipo_local,
             referencia,
             latitude,

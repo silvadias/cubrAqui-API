@@ -22,6 +22,7 @@ async function registrar(req, res){
             bloco,
             apartamento,
             setor,
+            secao,
             tipo_local,
             referencia,
             latitude,
@@ -57,6 +58,7 @@ async function registrar(req, res){
             bloco,
             apartamento,
             setor,
+            secao,
             tipo_local,
             referencia,
             latitude,
@@ -65,7 +67,7 @@ async function registrar(req, res){
       
           return res.status(201).json({
             message: 'Registro de endereço do usuário criado com sucesso!',
-            EnderecoEmpresa: EnderecoUsuarioRegistrado});
+            EnderecoUsuario: EnderecoUsuarioRegistrado});
 
         
     } catch (error) {

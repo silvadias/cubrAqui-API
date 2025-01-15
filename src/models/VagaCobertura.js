@@ -28,9 +28,17 @@ const VagaCobertura = sequelize.define('Vaga_Cobertura', {
             max: 200,
         }
     },
-    servico: { // profissional
-        type: DataTypes.STRING(50),
+    especialista: { // profissional
+        type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    expandirEspecificidade:{
+        type: DataTypes.INTEGER,
+        allowNull:true,
+    },
+    comprovacaoTecnica:{
+        type: DataTypes.STRING(255),
+        allowNull:false,  
     },
     dataInicio: {
         type: DataTypes.DATEONLY, // Apenas data (YYYY-MM-DD)
@@ -53,7 +61,7 @@ const VagaCobertura = sequelize.define('Vaga_Cobertura', {
         validate: {
             is: /^([0-1]\d|2[0-3]):([0-5]\d)$/, // Valida formato de hora
         }
-    },
+    },    
     ...EnderecoMixin,
     observacao: {
         type: DataTypes.STRING(255),

@@ -1,8 +1,9 @@
 4. Fluxo Geral
-Empresa cria uma vaga.
+x Empresa cria uma vaga.
 
-Controlador: JobController.
-Salva os detalhes na tabela job_posts.
+x Controlador: JobController.
+x Salva os detalhes na tabela job_posts.
+
 Usuário vê vagas abertas e aplica a uma.
 
 Controlador: ApplicationController.

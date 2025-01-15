@@ -2,7 +2,7 @@ const express   = require('express');
 const app       = express();
 
 //impotação de rotas
-const userRoutes            = require('./routes/userRoutes');
+
 const acessoRoutes          = require('./routes/acessoRoutes');
 const cadastrarRoutes       = require('./routes/cadastrarRoutes');
 const debugRouter           = require('./routes/debugRoutes');
@@ -20,7 +20,6 @@ app.use(express.json());
 // Rotas
 app.use('/',                debugRouter);           // arquivo e rota para debugar e entender código.
 app.use('/api/acessar',      acessoRoutes);          // Rota de Acesso e autorização.
-app.use('/api/usuario',       userRoutes);            // Retorna todos os usuários.
 app.use('/api/cadastrar',    cadastrarRoutes);       // Novos registros: usuarios e empresas.
 app.use('/api/consultar',   consultar);
 app.use('/api/alterar', validarrAcesso,alterar);
