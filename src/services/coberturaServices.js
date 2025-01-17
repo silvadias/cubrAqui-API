@@ -1,4 +1,6 @@
+const { Op } = require('sequelize'); // Importa operadores do Sequelize
 const Cobertura = require('../models/VagaCobertura');
+
 
 // Retorna IDs de vagas compatíveis com as habilidades do usuário
 async function obterVagasCompativeis(habilidadesUsuario) {
@@ -7,7 +9,10 @@ async function obterVagasCompativeis(habilidadesUsuario) {
     }
 
     const coberturas = await Cobertura.findAll({
-        where: { especialista: habilidadesUsuario },
+        where: {
+            especialista: habilidadesUsuario,
+            status : 'aberta',              
+         },
         attributes: ['id'],
     });
 
@@ -32,7 +37,28 @@ async function obterGeolocalizacoesVagas(idVagas) {
     return latitudeLongitude.map(item => [Number(item.latitude), Number(item.longitude)]);
 }
 
+async function alcanceVagas(arrayIdVagas,arrayDistancias) {
+    const vagas = await Cobertura.findAll({
+        where: {
+            id: arrayIdVagas, // IDs das vagas
+        },
+        attributes: ['id', 'kmAlcance'], // Retorna ID e distância fixa (kmAlcance)
+    });
+
+    // Filtra as vagas cujas distâncias calculadas atendem ao critério
+    const vagasNaDistancia = vagas.filter((vaga, index) => {
+        const distanciaCalculada = arrayDistancias[index];
+        return distanciaCalculada <= vaga.kmAlcance;
+    });
+
+    // Retorna apenas os IDs das vagas que passaram no critério
+    return vagasNaDistancia.map(vaga => vaga.id);
+    
+}
+
+
 module.exports = {
     obterVagasCompativeis,
     obterGeolocalizacoesVagas,
+    alcanceVagas
 };

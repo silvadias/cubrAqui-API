@@ -61,6 +61,10 @@ const VagaCobertura = sequelize.define('Vaga_Cobertura', {
         validate: {
             is: /^([0-1]\d|2[0-3]):([0-5]\d)$/, // Valida formato de hora
         }
+    },
+    kmAlcance: {
+        type: DataTypes.DECIMAL(5,2),
+        allowNull:false,        
     },    
     ...EnderecoMixin,
     observacao: {
@@ -68,7 +72,7 @@ const VagaCobertura = sequelize.define('Vaga_Cobertura', {
         allowNull: true,
     },
     status: {
-        type: DataTypes.ENUM('aberta', 'concorrência', 'atribuída', 'exercida', 'executada', 'fechada'),
+        type: DataTypes.ENUM('aberta','fechada'),
         allowNull: false,
         defaultValue: 'aberta',
     }
