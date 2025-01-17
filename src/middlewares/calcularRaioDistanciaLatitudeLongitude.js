@@ -6,7 +6,7 @@
  * @param {number[][]} vagasArray - Lista de coordenadas das vagas [[latitude, longitude], ...].
  * @returns {number[]} - Lista de distâncias em quilômetros.
  */
-function kmDistancia(pontoFixo, vagasArray) {
+function calcularDistancias(pontoFixo, vagasArray) {
     let array
     (Array.isArray(pontoFixo))? array = "array": array = "não é array";
     console.log(array);
@@ -34,6 +34,6 @@ function kmDistancia(pontoFixo, vagasArray) {
 }
 
 module.exports={
-    kmDistancia
+    calcularDistancias
 
 }
