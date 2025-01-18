@@ -37,6 +37,7 @@ async function obterGeolocalizacoesVagas(idVagas) {
     return latitudeLongitude.map(item => [Number(item.latitude), Number(item.longitude)]);
 }
 
+//recebe um array de vagas com a distancias e verifica quais vagas atendem o distanciamento.
 async function alcanceVagas(arrayIdVagas,arrayDistancias) {
     const vagas = await Cobertura.findAll({
         where: {

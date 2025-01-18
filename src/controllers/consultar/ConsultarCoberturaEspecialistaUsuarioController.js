@@ -1,38 +1,16 @@
-const {
-  obterGeolocalizacaoUsuario,
-  obterHabilidadesUsuario,
-} = require('../../services/usuarioServices');
-
-const {
-  obterVagasCompativeis,
-  obterGeolocalizacoesVagas,
-  alcanceVagas,
-} = require('../../services/coberturaServices');
-
-const { calcularDistancias } = require('../../middlewares/calcularRaioDistanciaLatitudeLongitude');
+const { coberturasMatch } = require('../../services/usuarioXcoberturaMatchServices');
 
 async function pegarCoberturaEspecialista(req, res) {
   try {
-      const idUsuario = req.body.idUsuario;
-
-      const habilidadesUsuario = await obterHabilidadesUsuario(idUsuario);
-      const vagas = await obterVagasCompativeis(habilidadesUsuario);
-
-      
-      const geoVagas = await obterGeolocalizacoesVagas(vagas);
-      
-      const enderecoUsuario = await obterGeolocalizacaoUsuario(idUsuario);
-      const distancias = calcularDistancias(enderecoUsuario, geoVagas);
-      const vagasRegiao = await alcanceVagas(vagas,distancias);
-
-
-      
-
-      res.json(vagasRegiao);
+    const { idUsuario } = req.body; // Corrigido
+    const matchCobertura = await coberturasMatch(idUsuario); // Adicionado await
+    return res.json(matchCobertura); // Retornando a resposta JSON
   } catch (error) {
-      console.error(error);
-      res.status(500).send(error.message);
+    console.error(error);
+    res.status(500).send(error.message); // Enviando resposta com o erro
   }
 }
 
-module.exports = { pegarCoberturaEspecialista };
+module.exports = {
+  pegarCoberturaEspecialista,
+};
