@@ -2,26 +2,26 @@ const express   = require('express');
 const router    = express.Router();
 
 // controllers
-const CadastrarUsuarioController
-= require('../controllers/cadastrar/CadastrarUsuarioController');
+const UsuarioController
+= require('../controllers/cadastrar/UsuarioController');
 
-const CadastrarEmpresaController
-= require('../controllers/cadastrar/CadastrarEmpresaController');
+const EmpresaController
+= require('../controllers/cadastrar/EmpresaController');
 
-const CadastrarVagaCoberturaController
-= require('../controllers/cadastrar/CadastrarVagaCoberturaController');
+const VagaCoberturaController
+= require('../controllers/cadastrar/VagaCoberturaController');
 
-const CadastrarEnderecoUsuarioController
-= require('../controllers/cadastrar/CadastrarEnderecoUsuarioController') ;
+const EnderecoUsuarioController
+= require('../controllers/cadastrar/EnderecoUsuarioController') ;
 
-const CadastrarEnderecoEmpresaController
-= require('../controllers/cadastrar/CadastrarEnderecoEmpresaController');
+const EnderecoEmpresaController
+= require('../controllers/cadastrar/EnderecoEmpresaController');
 
-const CadastrarClassificacaoProfissionalController
-= require('../controllers/cadastrar/CadastrarClassificacaoProfissionalController');
+const ClassificacaoProfissionalController
+= require('../controllers/cadastrar/ClassificacaoProfissionalController');
 
 const HabilidadeProfissionalUsuario
-= require('../controllers/cadastrar/CadastrarHabilidadeUsuarioController');
+= require('../controllers/cadastrar/HabilidadeUsuarioController');
 
 // middlewares
 const ValidarRegistroUsuario            = require('../middlewares/validarRegistroUsuario');
@@ -34,14 +34,14 @@ const { validarGeolocalizacao }         = require('../middlewares/validarGeoloca
 router.post(
     '/usuario',
     ValidarRegistroUsuario,
-    CadastrarUsuarioController.registrar
+    UsuarioController.registrar
 
 );
 
 router.post(
     '/empresa',
     ValidarRegistroEmpresa,
-    CadastrarEmpresaController.registrar
+    EmpresaController.registrar
 
 );
 
@@ -50,7 +50,7 @@ router.post(
         validarAcesso,
         validarCEP,
         validarGeolocalizacao,
-        CadastrarVagaCoberturaController.registrar
+        VagaCoberturaController.registrar
     
     );
 
@@ -59,7 +59,7 @@ router.post(
         validarAcesso,
         validarCEP,
         validarGeolocalizacao,
-    CadastrarEnderecoUsuarioController.registrar
+    EnderecoUsuarioController.registrar
 
 );
 
@@ -68,13 +68,13 @@ router.post(
         validarAcesso,
         validarCEP,
         validarGeolocalizacao,
-        CadastrarEnderecoEmpresaController.registrar
+        EnderecoEmpresaController.registrar
     
     );
 
     router.post(
         '/profissao',
-        CadastrarClassificacaoProfissionalController.registrar
+        ClassificacaoProfissionalController.registrar
     
     );
 
