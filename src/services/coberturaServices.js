@@ -46,7 +46,7 @@ async function alcanceVagas(arrayIdVagas,arrayDistancias) {
         attributes: ['id', 'kmAlcance'], // Retorna ID e distância fixa (kmAlcance)
     });
 
-    // Filtra as vagas cujas distâncias calculadas atendem ao critério
+    // Filtra as vagas cujas distâncias calculadas atendem ao critério//
     const vagasNaDistancia = vagas.filter((vaga, index) => {
         const distanciaCalculada = arrayDistancias[index];
         return distanciaCalculada <= vaga.kmAlcance;
@@ -56,10 +56,25 @@ async function alcanceVagas(arrayIdVagas,arrayDistancias) {
     return vagasNaDistancia.map(vaga => vaga.id);
     
 }
+// Função recebe array com as ids das cobertura elegiveis e retorna os dados para contemplação do usuario
+async function retornarCoberturaUsuario(idCobertura) {
+
+    const coberturas = await Cobertura.findAll(
+        {
+            where: {id:idCobertura}
+        }
+    )
+
+    return coberturas;
+    
+}
+
+
 
 
 module.exports = {
     obterVagasCompativeis,
     obterGeolocalizacoesVagas,
-    alcanceVagas
+    alcanceVagas,
+    retornarCoberturaUsuario
 };
