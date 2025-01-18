@@ -4,9 +4,9 @@ module.exports = async (req, res)=>{
 
     try {
 
-        const consultarListaEnderecoUsuariousuarios = await EnderecoUsuario.findAll();
+        const ListaEnderecoUsuariousuarios = await EnderecoUsuario.findAll();
 
-        return res.status(200).json({consultarListaEnderecoUsuariousuarios});
+        return res.status(200).json({ListaEnderecoUsuariousuarios});
 
     } catch (error) {
         
