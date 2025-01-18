@@ -12,7 +12,7 @@ const {
   const { calcularDistancias } 
   = require('../middlewares/calcularRaioDistanciaLatitudeLongitude');
   
-  async function coberturasMatch(idUsuario) {
+  async function coberturasCompativel(idUsuario) {
     try {
 
         const habilidadesUsuario  = await obterHabilidadesUsuario     (idUsuario);
@@ -30,4 +30,4 @@ const {
     }
   }
   
-  module.exports = { coberturasMatch };
+  module.exports = { coberturasCompativel };
