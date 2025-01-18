@@ -17,6 +17,7 @@ async function pegarCoberturaEspecialista(req, res)
 
     const { idUsuario } = req.body;
 
+
     // Recebe as ids da cobertura compatível com o cliente
     const Cobertura = await coberturasCompativel(idUsuario);
 
@@ -24,7 +25,7 @@ async function pegarCoberturaEspecialista(req, res)
 
     //const enderecoEmpresa = await pegarDadosEmpresa(retornoUsuario.idEmpresa);
 
-    return res.status(200).json(Cobertura);
+    return res.status(200).json(retornoUsuario);
 
   } catch (error) {
 

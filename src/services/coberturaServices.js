@@ -1,6 +1,6 @@
 const { Op } = require('sequelize'); // Importa operadores do Sequelize
 const Cobertura = require('../models/VagaCobertura');
-
+const { Vagas, Empresa, EnderecoEmpresa, ClassificacaoProfissional }= require('../models/associations/vagaEmpresaAssociation');
 
 // Retorna IDs de vagas compatíveis com as habilidades do usuário
 async function obterVagasCompativeis(habilidadesUsuario) {
@@ -56,25 +56,101 @@ async function alcanceVagas(arrayIdVagas,arrayDistancias) {
     return vagasNaDistancia.map(vaga => vaga.id);
     
 }
+async function montarHierarquia(classificacao) {
+    const ids = [];
+    const nomes = [];
+    let atual = classificacao;
+  
+    while (atual) {
+      ids.push(atual.id);
+      nomes.push(atual.nome);
+  
+      if (atual.idPai) {
+        // Busca o próximo pai
+        atual = await ClassificacaoProfissional.findByPk(atual.idPai);
+      } else {
+        atual = null; // Chegou ao nó raiz
+      }
+    }
+  
+    // Retorna as listas de IDs e nomes em ordem da raiz ao nó atual
+    return { ids: ids.reverse(), nomes: nomes.reverse() };
+  }
+  
+
+
 // Função recebe array com as ids das cobertura elegiveis e retorna os dados para contemplação do usuario
-async function retornarCoberturaUsuario(idCobertura) {
 
-    const coberturas = await Cobertura.findAll(
-        {
-            where: {id:idCobertura}
+
+async function retornarCoberturaUsuario(idsVagas) {
+    try {
+      const vagas = await Vagas.findAll({
+        where: { id: idsVagas },
+        //attributes:['id','cep'],
+        include: [
+          {
+            model: Empresa,
+            attributes:[
+                'id',
+                'cnpj',
+                'nomeFantasia',              
+            ],
+
+          
+            include: [{ model: EnderecoEmpresa,
+                attributes:[
+                    'id',
+                    'cep',
+                    'logradouro',
+                    'complemento',
+                    'bairro',
+                    'localidade',
+                    'uf',
+                    'numero',
+                    'bloco',
+                    'apartamento',
+                    'setor',
+                    'secao',                  
+                    
+                ],
+             }],
+          },
+          {
+            model: ClassificacaoProfissional,
+            attributes:['id','idPai'],
+            include: [{ model: ClassificacaoProfissional, as: 'pai' }],
+          },
+        ],
+      });
+  
+      /* const resultado = {};
+  
+      for (const vaga of vagas) {
+        if (vaga.ClassificacaoProfissional) {
+          const { ids, nomes } = await montarHierarquia(vaga.ClassificacaoProfissional);
+          vaga.ClassificacaoProfissional.dataValues.hierarquia = {
+            ids,
+            nomes,
+          };
         }
-    )
-
-    return coberturas;
-    
-}
-
-
-
+  
+        // Usa o ID da vaga como chave no objeto de resultado
+        resultado[vaga.id] = vaga;
+      } */
+  
+      return vagas;
+     // resultado;
+      
+    } catch (error) {
+      console.error('Erro ao processar dados:', error);
+      throw error;
+    }
+  }
 
 module.exports = {
     obterVagasCompativeis,
     obterGeolocalizacoesVagas,
     alcanceVagas,
-    retornarCoberturaUsuario
+    retornarCoberturaUsuario,
+    montarHierarquia
 };
