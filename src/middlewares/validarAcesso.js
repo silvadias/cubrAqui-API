@@ -11,8 +11,8 @@
  * Ele vai impedir o acesso a essas rotas caso o token não seja válido ou esteja ausente.
  */
 
-const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config/env');  // Chave secreta configurada no ambiente
+const jwt               = require('jsonwebtoken');
+const { JWT_SECRET }    = require('../config/env');  // Chave secreta configurada no ambiente
 
 
 module.exports = (req, res, next) => {

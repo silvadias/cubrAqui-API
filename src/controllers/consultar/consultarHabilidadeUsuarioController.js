@@ -2,7 +2,8 @@ const { Usuario, ClassificacaoProfissional}
 = require('../../models/associations/HabilidadeUsuarioProfissaoAssociation');
 
 // Obter habilidades de um usuário
-async function pegarHabilidadeUsuario(req, res) { 
+async function pegarHabilidadeUsuario(req, res) 
+{
 
     try {
       const { idUsuario } = req.body;

@@ -1,7 +1,8 @@
 const express   = require('express');
 const router    = express.Router();
 
-const {buscarCEP} = require('../controllers/BuscarCEPController');
+const {buscarCEP} 
+= require('../controllers/BuscarCEPController');
 
 const acessarHabilidadeUsuario
 =require('../controllers/consultar/consultarHabilidadeUsuarioController');
@@ -14,16 +15,16 @@ const ConsultarCoberturaEspecialista
 
 const ConsultarVagaCobertura
 =require('../controllers/consultar/consultarVagaCoberturaController');
+
 const consultarListaEnderecoUsuario = 
 require('../controllers/consultar/consultarListaEnderecoUsuario');
 
 
-router.post('/cep', buscarCEP);
-router.post('/habilidade/usuario',acessarHabilidadeUsuario.pegarHabilidadeUsuario);
-router.get('/lista/usuario', ConsultarListaUsuarioController.getAllUsers);
-
-router.get('/cobertura',ConsultarVagaCobertura)
-router.get('/endereco/usuario',consultarListaEnderecoUsuario);
-router.post('/cobertura/especialista',ConsultarCoberturaEspecialista.pegarCoberturaEspecialista);
+router.post('/cep',                     buscarCEP);
+router.post('/habilidade/usuario',      acessarHabilidadeUsuario.pegarHabilidadeUsuario);
+router.post('/cobertura/especialista',  ConsultarCoberturaEspecialista.pegarCoberturaEspecialista);
+router.get('/lista/usuario',            ConsultarListaUsuarioController.getAllUsers);
+router.get('/cobertura',                ConsultarVagaCobertura)
+router.get('/endereco/usuario',         consultarListaEnderecoUsuario);
 
 module.exports = router;

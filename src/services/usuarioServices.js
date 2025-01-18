@@ -1,5 +1,8 @@
-const EnderecoUsuario = require('../models/EnderecoUsuario');
-const EspecialidadeUsuario = require('../models/classificacaoProfissional/HabilidadeProfissionalUsuario');
+const EnderecoUsuario
+= require('../models/EnderecoUsuario');
+
+const EspecialidadeUsuario
+= require('../models/classificacaoProfissional/HabilidadeProfissionalUsuario');
 
 // Retorna a geolocalização do usuário, se existente
 async function obterGeolocalizacaoUsuario(idUsuario) { 

@@ -1,5 +1,3 @@
-// src/controllers/BuscarCEPController.js
-
 const axios = require('axios');
 
 const buscarCEP = async (req, res) => {
