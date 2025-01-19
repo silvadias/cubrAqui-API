@@ -54,25 +54,31 @@ async function alcanceVagas(arrayIdVagas,arrayDistancias) {
 
     // Retorna apenas os IDs das vagas que passaram no critério
     return vagasNaDistancia.map(vaga => vaga.id);
-    
+
 }
+
+
+// função utilizada para classificação da hierarquia profissional
 async function montarHierarquia(classificacao) {
-    const ids = [];
+  
+    const ids = [];    
     const nomes = [];
     let atual = classificacao;
-  
+     
     while (atual) {
       ids.push(atual.id);
-      nomes.push(atual.nome);
+      nomes.push(atual.nome);         
   
       if (atual.idPai) {
         // Busca o próximo pai
         atual = await ClassificacaoProfissional.findByPk(atual.idPai);
+        
       } else {
         atual = null; // Chegou ao nó raiz
-      }
+      }      
+      
     }
-  
+      
     // Retorna as listas de IDs e nomes em ordem da raiz ao nó atual
     return { ids: ids.reverse(), nomes: nomes.reverse() };
   }
@@ -80,13 +86,10 @@ async function montarHierarquia(classificacao) {
 
 
 // Função recebe array com as ids das cobertura elegiveis e retorna os dados para contemplação do usuario
-
-
 async function retornarCoberturaUsuario(idsVagas) {
     try {
       const vagas = await Vagas.findAll({
-        where: { id: idsVagas },
-        //attributes:['id','cep'],
+        where: { id: idsVagas },       
         include: [
           {
             model: Empresa,
@@ -117,25 +120,30 @@ async function retornarCoberturaUsuario(idsVagas) {
           },
           {
             model: ClassificacaoProfissional,
-            attributes:['id','idPai'],
-            include: [{ model: ClassificacaoProfissional, as: 'pai' }],
+    
           },
         ],
       });
   
       const resultado = {};
-  
+      
       for (const vaga of vagas) {
+
+        
         if (vaga.ClassificacaoProfissional) {
+          
           const { ids, nomes } = await montarHierarquia(vaga.ClassificacaoProfissional);
+          
           vaga.ClassificacaoProfissional.dataValues.hierarquia = {
             ids,
-            nomes,
-          };
-        }
+            nomes,                       
+          };          
+          
+        }    
   
         // Usa o ID da vaga como chave no objeto de resultado
-        resultado[vaga.id] = vaga;
+        resultado[vaga.id] = vaga;     
+               
       }
   
       return resultado;
