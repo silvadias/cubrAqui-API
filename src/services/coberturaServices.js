@@ -123,7 +123,7 @@ async function retornarCoberturaUsuario(idsVagas) {
         ],
       });
   
-      /* const resultado = {};
+      const resultado = {};
   
       for (const vaga of vagas) {
         if (vaga.ClassificacaoProfissional) {
@@ -136,10 +136,9 @@ async function retornarCoberturaUsuario(idsVagas) {
   
         // Usa o ID da vaga como chave no objeto de resultado
         resultado[vaga.id] = vaga;
-      } */
+      }
   
-      return vagas;
-     // resultado;
+      return resultado;
       
     } catch (error) {
       console.error('Erro ao processar dados:', error);
