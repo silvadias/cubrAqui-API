@@ -1,31 +1,33 @@
-const { 
-    Usuario, 
-    Empresa,
-    VagaAplicada,
-    VagaCobertura
-} 
-= require('../../models/associations/vagaAplicadaAssociation');
+const {
+  Usuario,
+  Empresa,
+  VagaAplicada,
+  VagaCobertura,
+} = require('../../models/associations/vagaAplicadaAssociation');
 
-// Obter habilidades de um usuário
-async function vagasAplicadas(req, res) 
-{
-    try {
-      
+const { pegarVagasAplicadas } = require('../../services/empresaServices');
 
-      res.status(200).json({message: 'controller de cobertura ativo'});  
-      
-    }catch(error){
+// Endpoint para obter as vagas aplicadas
+async function vagasAplicadas(req, res) {
+  try {
+      const { idEmpresa } = req.body; // Obtém o ID da empresa do corpo da requisição
 
-      console.log('Nao foi possível obter o painel de cobertura :'.error);    
+      // Obtém as vagas aplicadas usando o serviço
+      const painelVagas = await pegarVagasAplicadas(idEmpresa);
 
-    }
-    
-  };  
-  
-  module.exports = {
-    vagasAplicadas,
-    Usuario, 
-    Empresa,
-    VagaAplicada,
-    VagaCobertura
+      // Resposta com os dados estruturados
+      res.status(200).json({ painelVagas });
+  } catch (error) {
+      console.error('Não foi possível obter o painel de cobertura:', error);
+      res.status(500).json({ error: 'Erro ao obter vagas aplicadas' });
+  }
+}
+
+module.exports = {
+  vagasAplicadas,
+  pegarVagasAplicadas,
+  Usuario,
+  Empresa,
+  VagaAplicada,
+  VagaCobertura,
 };

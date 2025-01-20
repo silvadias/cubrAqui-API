@@ -1,7 +1,7 @@
 const Usuario = require('../Usuario');
 const Empresa = require('../Empresa');
 const VagaCobertura = require('../VagaCobertura');
-const VagaAplicada =require('../VagaAplicada');
+const VagaAplicada = require('../VagaAplicada');
 
 // Relacionamentos
 Usuario.hasMany(VagaAplicada, { foreignKey: 'idUsuario', as: 'vagasAplicadas' });
