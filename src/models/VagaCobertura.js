@@ -81,4 +81,4 @@ const VagaCobertura = sequelize.define('Vaga_Cobertura', {
     timestamps: true, // Inclui createdAt e updatedAt
 });
 
-module.exports = VagaCobertura;
+module.exports = VagaCobertura; 

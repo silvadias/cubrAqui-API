@@ -44,6 +44,24 @@ async function obterHabilidadesUsuario(idUsuario) {
     return habilidades.map(h => h.idHabilidade);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     obterGeolocalizacaoUsuario,
     obterHabilidadesUsuario,

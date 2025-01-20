@@ -23,6 +23,7 @@ const ClassificacaoProfissionalController
 const HabilidadeProfissionalUsuario
 = require('../controllers/cadastrar/HabilidadeUsuarioController');
 
+const AplicarVagaController = require('../controllers/cadastrar/AplicarVagaCotroller');
 // middlewares
 const ValidarRegistroUsuario            = require('../middlewares/validarRegistroUsuario');
 const ValidarRegistroEmpresa            = require('../middlewares/validarRegistroEmpresa');
@@ -83,6 +84,10 @@ router.post(
         HabilidadeProfissionalUsuario.registrar
     
     );
+
+    router.post('/cobertura/aplicar',AplicarVagaController.registrar);
+
+
 
 
 module.exports = router;
