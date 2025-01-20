@@ -1,8 +1,5 @@
 const { 
-    VagaAplicada,
-    Usuario,
-    Empresa,
-    VagaCobertura
+    VagaAplicada,    
  } = require("../../models/associations/vagaAplicadaAssociation");
 
  async function registrar(req, res) 
@@ -43,9 +40,5 @@ const {
  }
  
  module.exports = {
-    registrar,
-    VagaAplicada,
-    Usuario,
-    Empresa,
-    VagaCobertura
+    registrar    
  };

@@ -5,19 +5,23 @@ const {buscarCEP}
 = require('../controllers/BuscarCEPController');
 
 const HabilidadeUsuario
-=require('../controllers/consultar/HabilidadeUsuarioController');
+= require('../controllers/consultar/HabilidadeUsuarioController');
 
 const ListaUsuarioController
-=require('../controllers/consultar/ListaUsuarioController');
+= require('../controllers/consultar/ListaUsuarioController');
 
 const CoberturaCompativelController
-=require('../controllers/consultar/CoberturaCompativelController');
+= require('../controllers/consultar/CoberturaCompativelController');
 
 const VagaCobertura
-=require('../controllers/consultar/VagaCoberturaController');
+= require('../controllers/consultar/VagaCoberturaController');
 
-const ListaEnderecoUsuario = 
-require('../controllers/consultar/ListaEnderecoUsuario');
+const ListaEnderecoUsuario 
+= require('../controllers/consultar/ListaEnderecoUsuario');
+
+const CoberturaAplicada 
+= require('../controllers/consultar/VagasAplicadas.Controller');
+
 
 
 router.post('/cep',                     buscarCEP);
@@ -26,6 +30,7 @@ router.post('/cobertura/compativel',    CoberturaCompativelController.pegarCober
 router.get('/lista/usuario',            ListaUsuarioController.getAllUsers);
 router.get('/cobertura',                VagaCobertura)
 router.get('/endereco/usuario',         ListaEnderecoUsuario);
+router.get('/cobertura/aplicada',       CoberturaAplicada.vagasAplicadas);
 
 
 module.exports = router;
