@@ -66,10 +66,15 @@ async function pegarVagasAplicadas(idEmpresa) {
                 {
                     model: Empresa,
                     as: 'empresa', // Alias definido na associação
-                    //attributes: ['id', 'nome'], // Campos desejados da empresa
+                    attributes: [
+                        'id',
+                        'nomeFantasia',
+                    'emailCorporativo',
+                    'matricialidade'
+                ], // Campos desejados da empresa
                 },
             ],
-            //attributes: ['id', 'idUsuario', 'idCobertura', 'idEmpresa', 'dataAplicacao'], // Inclui os campos da tabela principal
+            //attributes: [], // Inclui os campos da tabela principal
         });
 
         return painelVagas;
