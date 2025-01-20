@@ -10,7 +10,7 @@ const {pegarDadosEmpresa,pegarEnderecoEmpresa}
 = require('../../services/empresaServices');
 
 
-async function pegarCoberturaEspecialista(req, res) 
+async function pegarCoberturaCompativel(req, res) 
 {
 
   try {
@@ -36,5 +36,5 @@ async function pegarCoberturaEspecialista(req, res)
 }
 
 module.exports = {
-  pegarCoberturaEspecialista,
+  pegarCoberturaCompativel
 };

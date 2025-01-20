@@ -10,8 +10,8 @@ const HabilidadeUsuario
 const ListaUsuarioController
 =require('../controllers/consultar/ListaUsuarioController');
 
-const CoberturaEspecialista
-=require('../controllers/consultar/UsuarioEspecialistaController');
+const CoberturaCompativelController
+=require('../controllers/consultar/CoberturaCompativelController');
 
 const VagaCobertura
 =require('../controllers/consultar/VagaCoberturaController');
@@ -22,7 +22,7 @@ require('../controllers/consultar/ListaEnderecoUsuario');
 
 router.post('/cep',                     buscarCEP);
 router.post('/habilidade/usuario',      HabilidadeUsuario.pegarHabilidadeUsuario);
-router.post('/cobertura/especialista',  CoberturaEspecialista.pegarCoberturaEspecialista);
+router.post('/cobertura/compativel',    CoberturaCompativelController.pegarCoberturaCompativel);
 router.get('/lista/usuario',            ListaUsuarioController.getAllUsers);
 router.get('/cobertura',                VagaCobertura)
 router.get('/endereco/usuario',         ListaEnderecoUsuario);
