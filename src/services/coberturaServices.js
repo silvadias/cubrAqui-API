@@ -89,7 +89,24 @@ async function montarHierarquia(classificacao) {
 async function retornarCoberturaUsuario(idsVagas) {
     try {
       const vagas = await Vagas.findAll({
-        where: { id: idsVagas },       
+        where: { id: idsVagas },
+        attributes:{exclude:[
+          'idEmpresa',
+          'especialista',
+          'expandirEspecificidade',
+          'kmAlcance',
+          'uf',
+          'ibge',
+          'gia',
+          'ddd',
+          'siafi',
+          'latitude',
+          'longitude',
+          'status',
+          'createdAt',
+          'updatedAt',
+
+        ]},       
         include: [
           {
             model: Empresa,
@@ -108,7 +125,7 @@ async function retornarCoberturaUsuario(idsVagas) {
                     'complemento',
                     'bairro',
                     'localidade',
-                    'uf',
+                    'estado',
                     'numero',
                     'bloco',
                     'apartamento',
