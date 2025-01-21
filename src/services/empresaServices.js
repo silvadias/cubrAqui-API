@@ -77,7 +77,23 @@ async function pegarVagasAplicadas(idEmpresa) {
             //attributes: [], // Inclui os campos da tabela principal
         });
 
-        return painelVagas;
+        
+        const painel = {};
+        let contador=0;
+
+        for(usuarios of painelVagas){
+            painel[painelVagas[contador].id]=usuarios;                 
+            contador++
+        }
+        
+        // Retorna o valor de map após todas as iterações
+        return painel;
+
+
+
+
+
+
     } catch (error) {
         throw new Error(error.message);
     }
