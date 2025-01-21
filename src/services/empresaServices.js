@@ -51,8 +51,8 @@ async function pegarVagasAplicadas(idEmpresa) {
                         'logitude',
                         'createdAt',
                         'updatedAt',
-                    ]},
-                   
+
+                    ]},                   
                 },
                 {
                     model: Usuario,
@@ -78,21 +78,16 @@ async function pegarVagasAplicadas(idEmpresa) {
         });
 
         
-        const painel = {};
+        let painel = {};
         let contador=0;
 
-        for(usuarios of painelVagas){
+        for(usuarios of painelVagas){              
             painel[painelVagas[contador].id]=usuarios;                 
             contador++
         }
         
         // Retorna o valor de map após todas as iterações
         return painel;
-
-
-
-
-
 
     } catch (error) {
         throw new Error(error.message);
