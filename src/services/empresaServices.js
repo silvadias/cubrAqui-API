@@ -10,6 +10,9 @@ const {
 } 
 = require('../models/associations/vagaAplicadaAssociation');
 
+const {RegistroContratacao} 
+= require('../models/registroContratacao');
+
 
 // retorna os dados da empresa excluindo dados sencíveis
 async function pegarDadosEmpresa(idEmpresa) {
@@ -168,6 +171,44 @@ async function fecharVagaCobertura(idVagaCobertura){
 }
 
 
+async function fecharContratoCobertura(registroBasico,registrosGeral){
+
+    try {
+        
+        registroBasico.id
+        registroBasico.idCobertura
+        registroBasico.idUsuario
+        registroBasico.idEmpresa
+
+
+        await RegistroContratacao.create(
+            {
+                idVagaAplicada:registroBasico.id,
+                idCobertura:registroBasico.idCobertura,
+                idUsuario:registroBasico.idUsuario,
+                idEmpresa:registroBasico.idEmpresa,
+                dados:registrosGeral
+            }
+        );
+       
+        
+    
+        return {message: 'Cobertura Finalizada com sucesso!'};
+
+    } catch (error) {
+
+        throw new Error(error.message);
+
+    }    
+   
+}
+
+async function pegarDadoscobertura(idCobertura) {
+    relacao = await VagaCobertura.findByPk(idCobertura);
+    return relacao;
+    
+}
+
 
 
 
@@ -181,5 +222,7 @@ module.exports={
     pegarDadosContratacao,
     pegarNumeroVagasCobertura,
     reduzirUmaVagaCobertura,
-    fecharVagaCobertura
+    fecharVagaCobertura,
+    fecharContratoCobertura,
+    pegarDadoscobertura
 };

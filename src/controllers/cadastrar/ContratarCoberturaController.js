@@ -2,15 +2,21 @@ const {
     pegarDadosContratacao,
     pegarNumeroVagasCobertura,
     reduzirUmaVagaCobertura,
-    fecharVagaCobertura
+    fecharContratoCobertura,
+    pegarDadoscobertura
+    
 
 }
 =require('../../services/empresaServices');
 
 
+
+
 async function contratarUsuario(req, res) {
 
     try {
+        
+        //verificar se ja tem aceite do usuario, este procedimento após aceite do mesmo. 
         const {idVagaAplicada}  = req.body
         const dadosContratacao  = await pegarDadosContratacao(idVagaAplicada);
         const idCobertura       = dadosContratacao.idCobertura
@@ -26,6 +32,10 @@ async function contratarUsuario(req, res) {
             await fecharVagaCobertura(idCobertura)
 
         }
+        const dadosCobertura = pegarDadoscobertura(idCobertura)
+        await fecharContratoCobertura(dadosContratacao,dadosCobertura);
+        // verificar que dados CObertura esta recebendo array vazio, porem no bando de dados,o arry esta sendo registrado normalment.e 
+
 
 
 
@@ -38,7 +48,11 @@ async function contratarUsuario(req, res) {
         começa a produção do aplicativo react. */
 
         
-        return res.json({numeroVagasCobertura});
+        return res.json(
+            {
+                dadosCobertura
+            //    message:'registrado dados cobertura'
+             });
         
 
     } catch (error) {
