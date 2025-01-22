@@ -5,11 +5,14 @@ const {pegarDadosContratacao}
 async function contratarUsuario(req, res) {
 
     try {
-        const {idVagaAplicada} = req.body
-        const dadosContratacao = await pegarDadosContratacao(idVagaAplicada)
+        const {idVagaAplicada}  = req.body
+        const dadosContratacao  = await pegarDadosContratacao(idVagaAplicada);
+        const idCobertura       = dadosContratacao.idCobertura
+        const idUsuario         = dadosContratacao.idUsuario
+        const idEmpresa         = dadosContratacao.idEmpresa
 
-
-        return res.status(200).json({dadosContratacao});
+        return res.status(200).json({idEmpresa});
+        
 
     } catch (error) {
 
