@@ -204,12 +204,28 @@ async function fecharContratoCobertura(registroBasico,registrosGeral){
 }
 
 async function pegarDadoscobertura(idCobertura) {
-    relacao = await VagaCobertura.findByPk(idCobertura);
+    const relacao = await VagaCobertura.findByPk(idCobertura);
     return relacao;
     
 }
 
 
+async function fecharVagaAPlicada(idVagaAplicada){
+   
+   try {
+
+        await VagaAplicada.destroy(
+            {
+                where:{id:idVagaAplicada}
+            }
+        );
+
+   } catch (error) {
+
+    throw new Error(error.message);
+    
+   }
+}
 
 
 
@@ -224,5 +240,6 @@ module.exports={
     reduzirUmaVagaCobertura,
     fecharVagaCobertura,
     fecharContratoCobertura,
-    pegarDadoscobertura
+    pegarDadoscobertura,
+    fecharVagaAPlicada
 };
