@@ -109,11 +109,53 @@ async function pegarDadosContratacao(idVagaAplicada){
    
 }
 
+async function pegarNumeroVagasCobertura(idVagaCobertura){
+    try {
+        
+        const dados = await VagaCobertura.findByPk(idVagaCobertura);
+        return dados.vagas
+
+    } catch (error) {
+        throw new Error(error.message);
+
+    }    
+   
+}
+
+
+async function reduzirUmaVagaCobertura(idVagaCobertura, vagas){
+    try {
+        
+        const dados = await VagaCobertura.update(
+            {
+            vagas: vagas,
+            },
+        {             
+          where:{id:idVagaCobertura}
+        });        
+        
+        
+          return {message: 'numero de vagas reduzido'};
+
+    } catch (error) {
+        throw new Error(error.message);
+
+    }    
+   
+}
+
+
+
+
+
+
 
 
 module.exports={
     pegarDadosEmpresa,
     pegarEnderecoEmpresa,
     pegarVagasAplicadas,
-    pegarDadosContratacao
+    pegarDadosContratacao,
+    pegarNumeroVagasCobertura,
+    reduzirUmaVagaCobertura
 };
