@@ -1,7 +1,8 @@
 const {
     pegarDadosContratacao,
     pegarNumeroVagasCobertura,
-    reduzirUmaVagaCobertura
+    reduzirUmaVagaCobertura,
+    fecharVagaCobertura
 
 }
 =require('../../services/empresaServices');
@@ -16,9 +17,14 @@ async function contratarUsuario(req, res) {
         const idUsuario         = dadosContratacao.idUsuario
         const idEmpresa         = dadosContratacao.idEmpresa
         const numeroVagasCobertura = await pegarNumeroVagasCobertura(idCobertura);
+        
         if(numeroVagasCobertura > 1){
             vagas = numeroVagasCobertura - 1
             await reduzirUmaVagaCobertura(idCobertura, vagas);
+        }
+        if(numeroVagasCobertura == 1){
+            await fecharVagaCobertura(idCobertura)
+
         }
 
 

@@ -126,7 +126,7 @@ async function pegarNumeroVagasCobertura(idVagaCobertura){
 async function reduzirUmaVagaCobertura(idVagaCobertura, vagas){
     try {
         
-        const dados = await VagaCobertura.update(
+        await VagaCobertura.update(
             {
             vagas: vagas,
             },
@@ -138,6 +138,29 @@ async function reduzirUmaVagaCobertura(idVagaCobertura, vagas){
           return {message: 'numero de vagas reduzido'};
 
     } catch (error) {
+        throw new Error(error.message);
+
+    }    
+   
+}
+
+async function fecharVagaCobertura(idVagaCobertura){
+
+    try {
+        await VagaCobertura.update(
+            {
+            vagas: 0,
+            status: 'fechada',
+            },
+        {             
+        where:{id:idVagaCobertura}
+        });        
+        
+    
+        return {message: 'Cobertura Finalizada com sucesso!'};
+
+    } catch (error) {
+
         throw new Error(error.message);
 
     }    
@@ -157,5 +180,6 @@ module.exports={
     pegarVagasAplicadas,
     pegarDadosContratacao,
     pegarNumeroVagasCobertura,
-    reduzirUmaVagaCobertura
+    reduzirUmaVagaCobertura,
+    fecharVagaCobertura
 };
