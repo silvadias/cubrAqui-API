@@ -23,6 +23,11 @@ const ClassificacaoProfissionalController
 const HabilidadeProfissionalUsuario
 = require('../controllers/cadastrar/HabilidadeUsuarioController');
 
+const ContratarCobertura 
+= require('../controllers/cadastrar/ContratarCoberturaController');
+
+
+
 const AplicarVagaController = require('../controllers/cadastrar/AplicarVagaCotroller');
 // middlewares
 const ValidarRegistroUsuario            = require('../middlewares/validarRegistroUsuario');
@@ -85,7 +90,15 @@ router.post(
     
     );
 
-    router.post('/cobertura/aplicar',AplicarVagaController.registrar);
+    router.post(
+        '/cobertura/aplicar',
+        AplicarVagaController.registrar
+    );
+
+    router.post(
+        '/cobertura/contratar',
+        ContratarCobertura.contratarUsuario
+    );
 
 
 

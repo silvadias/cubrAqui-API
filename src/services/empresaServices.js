@@ -92,11 +92,28 @@ async function pegarVagasAplicadas(idEmpresa) {
     } catch (error) {
         throw new Error(error.message);
     }
+
 }
+
+
+async function pegarDadosContratacao(idVagaAplicada){
+    try {
+        
+        const dados = await VagaAplicada.findByPk(idVagaAplicada);
+        return dados; 
+
+    } catch (error) {
+        throw new Error(error.message);
+
+    }    
+   
+}
+
 
 
 module.exports={
     pegarDadosEmpresa,
     pegarEnderecoEmpresa,
-    pegarVagasAplicadas
+    pegarVagasAplicadas,
+    pegarDadosContratacao
 };
