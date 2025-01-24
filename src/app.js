@@ -1,5 +1,9 @@
 const express   = require('express');
 const app       = express();
+const cors      = require('cors');
+
+
+
 
 //impotação de rotas
 const acessoRoutes          = require('./routes/acessoRoutes');
@@ -26,5 +30,6 @@ app.use('/api/alterar',      validarrAcesso,alterar);
 
 // Middleware de tratamento de erros
 app.use(errorHandler);
+app.use(cors());
 
 module.exports = app;
