@@ -39,6 +39,7 @@ async function registrar(req, res){
             longitude,
             observacao,
         } = req.body
+        //return res.send({vagas})
 
         const VagaCoberturaAberta = await VagaCobertura.create({
             idEmpresa: id,

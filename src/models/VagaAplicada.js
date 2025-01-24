@@ -39,6 +39,11 @@ const VagaAplicada = sequelize.define('Vaga_Aplicada', {
             key: 'id',
         }
     },
+    aceiteEmpresa:{
+        type: DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:false
+    },
     
 }, {
     tableName: 'vagas_aplicadas', // Nome da tabela no banco de dados

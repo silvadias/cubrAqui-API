@@ -19,8 +19,8 @@ services:
       "
     depends_on:
       - db
-    networks:
-      - cubraqui
+    networks:      
+      - appExpo
   
   db:
     image: mysql:8
@@ -36,8 +36,9 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - cubraqui
+      - appExpo
+      
 
 networks:
-  cubraqui:
+  appExpo:
     driver: bridge

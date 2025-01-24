@@ -220,11 +220,36 @@ async function fecharVagaAPlicada(idVagaAplicada){
             }
         );
 
+        
+
    } catch (error) {
 
     throw new Error(error.message);
     
    }
+}
+
+async function aceitaUsuarioCobrir(idVagaCobertura) {
+    try {
+        
+            const aceite = await VagaAplicada.update(
+                {
+                    aceiteEmpresa: true,
+                },
+                    {             
+                    where:{id:idVagaCobertura}
+                    }
+            );
+            
+                return {message: "Usuario aceito, aguarde a confirmação"}  
+                    
+        
+    } catch (error) {
+
+        throw new Error(error.message);    
+        
+    }  
+    
 }
 
 
@@ -241,5 +266,6 @@ module.exports={
     fecharVagaCobertura,
     fecharContratoCobertura,
     pegarDadoscobertura,
-    fecharVagaAPlicada
+    fecharVagaAPlicada,
+    aceitaUsuarioCobrir
 };

@@ -1,3 +1,5 @@
+//observar que o comportamento desta página é a finalização total de aceite
+// é um controller que deveria ser ser o aceite do usuario. 
 const {
     pegarDadosContratacao,
     pegarNumeroVagasCobertura,
@@ -8,7 +10,7 @@ const {
 }
 =require('../../services/empresaServices');
 
-async function contratarUsuario(req, res) {
+async function fecharContrato(req, res) {
 
     try {
         
@@ -33,7 +35,7 @@ async function contratarUsuario(req, res) {
         await fecharContratoCobertura(dadosContratacao,dadosCobertura);
         await fecharVagaAPlicada(idVagaAplicada); 
         
-        return res.json({message:'registrado dados cobertura'});        
+        return res.json({message:'Contratação consolidada'});        
 
     } catch (error) {
 
@@ -44,5 +46,5 @@ async function contratarUsuario(req, res) {
 }
 
 module.exports={
-    contratarUsuario
+    fecharContrato
 }

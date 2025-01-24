@@ -4,6 +4,9 @@ const EnderecoUsuario
 const EspecialidadeUsuario
 = require('../models/classificacaoProfissional/HabilidadeProfissionalUsuario');
 
+const {RegistroContratacao}
+= require('../models/registroContratacao');
+
 // Retorna a geolocalização do usuário, se existente
 async function obterGeolocalizacaoUsuario(idUsuario) { 
     if (!idUsuario) {
@@ -44,25 +47,38 @@ async function obterHabilidadesUsuario(idUsuario) {
     return habilidades.map(h => h.idHabilidade);
 }
 
+async function constratosUsuario(idUsuario) {
+    try {
+        
+        const painelUsuario = await RegistroContratacao.findAll(
+            {
+                where:{idUsuario:idUsuario}
+            }
+        )
 
+        const contratos = {
+            constratosUsuario: painelUsuario.reduce((acc, contrato) => {
+                acc[contrato.id] = {
+                    dados: JSON.parse(contrato.dados)
+                };
+                return acc; // Necessário para atualizar o acumulador
+            }, {}) // O segundo argumento inicializa o acumulador como um objeto vazio
+        };
+        
+        
+        return contratos;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    } catch (error) {
+        throw new Error(error.message);
+        
+    }
+    
+}
 
 
 
 module.exports = {
     obterGeolocalizacaoUsuario,
     obterHabilidadesUsuario,
+    constratosUsuario
 };

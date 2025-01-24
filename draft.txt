@@ -19,3 +19,8 @@ Notificações.
 
 Notifica empresa sobre o candidato aceito.
 Notifica usuário sobre a aceitação ou rejeição.
+
+
+8888888888888888888888888888888888888888888
+dividas.
+Ao registrar habilidade do usuario, se nao tiber habiidade o usuario não tem resposta. 

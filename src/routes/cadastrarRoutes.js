@@ -24,7 +24,10 @@ const HabilidadeProfissionalUsuario
 = require('../controllers/cadastrar/HabilidadeUsuarioController');
 
 const ContratarCobertura 
-= require('../controllers/cadastrar/ContratarCoberturaController');
+= require('../controllers/cadastrar/FecharContratoController');
+
+const AceitarUsuarioCobertura
+=require('../controllers/cadastrar/LiberarAceiteUsuarioController');
 
 
 
@@ -96,9 +99,11 @@ router.post(
     );
 
     router.post(
-        '/cobertura/contratar',
-        ContratarCobertura.contratarUsuario
+        '/cobertura/contratar', // verificar possibilidade de usar contratos/fechar.
+        ContratarCobertura.fecharContrato
     );
+
+    router.post('/cobertura/aceite',AceitarUsuarioCobertura.aceitarUsuarioCobertura)
 
 
 

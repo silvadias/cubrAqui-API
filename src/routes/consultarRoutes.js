@@ -22,6 +22,9 @@ const ListaEnderecoUsuario
 const CoberturaAplicada 
 = require('../controllers/consultar/VagasAplicadas.Controller');
 
+const PainelContratosUsuario
+=require('../controllers/consultar/painelContratosUsuarioController');
+
 
 
 router.post('/cep',                     buscarCEP);
@@ -31,6 +34,7 @@ router.get('/lista/usuario',            ListaUsuarioController.getAllUsers);
 router.get('/cobertura',                VagaCobertura)
 router.get('/endereco/usuario',         ListaEnderecoUsuario);
 router.get('/cobertura/aplicada',       CoberturaAplicada.vagasAplicadas);
+router.get('/contratos/usuario',PainelContratosUsuario.pegarContratosUsuario)
 
 
 module.exports = router;
