@@ -13,7 +13,7 @@ const {
 async function fecharContrato(req, res) {
 
     try {
-        
+        //antes de fechar contrato a vaga deve estar disponível
         //verificar se ja tem aceite do usuario, este procedimento após aceite do mesmo. 
         const {idVagaAplicada}  = req.body
         const dadosContratacao  = await pegarDadosContratacao(idVagaAplicada);

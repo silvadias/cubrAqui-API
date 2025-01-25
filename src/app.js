@@ -18,6 +18,8 @@ const validarrAcesso        = require('./middlewares/validarAcesso'); // Middlew
 
 // Middleware para analisar JSON no corpo das requisições
 app.use(express.json());
+app.use(cors());
+
 
 
 // Rotas
@@ -30,6 +32,5 @@ app.use('/api/alterar',      validarrAcesso,alterar);
 
 // Middleware de tratamento de erros
 app.use(errorHandler);
-app.use(cors());
 
 module.exports = app;
